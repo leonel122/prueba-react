@@ -9,19 +9,19 @@ import {
   DeleteButton,
   CardActions,
   TabbedShowLayout,
-  Tab
+  Tab,
 } from "react-admin";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 
-const CreateRelatedCommentButton = props => {
+const CreateRelatedCommentButton = (props) => {
   console.log("id!", props);
   return (
     <Button
       component={Link}
       to={{
-        pathname: "/products-categories/create",
-        state: { category_id: props.id }
+        pathname: "/categories/create",
+        state: { category_id: props.id },
       }}
     >
       Create
@@ -35,7 +35,7 @@ const PostActions = ({ id }) => (
   </CardActions>
 );
 
-export const ProductsCategoriesShow = props => {
+export const ProductsCategoriesShow = (props) => {
   const { state = {} } = props.location;
   return (
     <Show {...props}>

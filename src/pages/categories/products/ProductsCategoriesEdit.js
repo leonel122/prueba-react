@@ -1,97 +1,82 @@
-import React, { Component, useCallback } from "react";
-import { useHistory } from "react-router-dom";
-
+import React, { Component } from "react";
 import {
+  Edit,
   SimpleForm,
   TextInput,
-  useEditController,
   ReferenceInput,
-  SelectInput
+  SelectInput,
+  useGetOne,
 } from "react-admin";
-import CloseIcon from "@material-ui/icons/Close";
+import Grid from "@material-ui/core/Grid";
+import { Title, ImgField } from "./";
+// import S3File from "../../../components/S3-field";
+// import { expressCategoriesService } from "../../../utils/Api";
+// import { URL_S3 } from "../../../constants";
 
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { Title } from "./";
-import { Paper, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    paddingTop: 40
-  },
-  title: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    margin: "1em"
-  },
-  form: {
-    /*  [theme.breakpoints.up("xs")]: {
-      width: 400
-    },
-    [theme.breakpoints.down("xs")]: {
-      width: "100vw",
-      marginTop: -30
-    } */
-  },
-  inlineField: {
-    display: "inline-block",
-    width: "50%"
-  }
-}));
-const ProductsCategoriesEdit = ({ onCancel, ...props }) => {
-  const classes = useStyles();
-  const controllerProps = useEditController(props);
-  const history = useHistory();
-  const handleClose = useCallback(() => {
-    history.push("/locations-states");
-  }, [history]);
-
-  const handleOnCancel = () => {
-    if (onCancel) return onCancel();
-    handleClose();
+export default class CompanyEdit extends Component {
+  state = {
+    path_image: null,
+    expanded: false,
   };
-  if (!controllerProps.record) {
-    return null;
+
+  async fetchData() {
+    console.log(this.props);
+    /*  expressCategoriesService
+      .get(this.props.id)
+      .then((it) => this.setState({ path_image: it.path_image })); */
   }
-  return (
-    <div className={classes.root}>
-      <div className={classes.title}>
-        <Typography variant="h6">Editar categoria de servicios</Typography>
-        <IconButton onClick={handleOnCancel}>
-          <CloseIcon />
-        </IconButton>
-      </div>
-      <SimpleForm
-        className={classes.form}
-        basePath={controllerProps.basePath}
-        record={controllerProps.record}
-        save={controllerProps.save}
-        version={controllerProps.version}
-        redirect="list"
-        resource="users"
-      >
-        <TextInput fullWidth source="id" label={false} type="hidden" />
-        <Grid fullWidth spacing={16}>
-          <Grid item xl={6} spacing={6}>
-            <TextInput source="name" label="Nombre" />
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  handleUploadFinish = async (url, id) => {
+    console.log(url);
+    console.log(this.props);
+    /* await expressCategoriesService
+      .patch(this.props.id, { path_image: url })
+      .then((it) => this.fetchData()); */
+  };
+  render() {
+    const { path_image } = this.state;
+    console.log(path_image);
+
+    return (
+      <Edit title={<Title />} {...this.props}>
+        <SimpleForm>
+          <Grid container fullWidth spacing={16}>
+            <Grid item xs={6}>
+              <TextInput fullWidth source="name" label="Nombre" />
+            </Grid>
+            <Grid item xs={6}>
+              <ReferenceInput
+                fullWidth
+                label="Padre"
+                source="parent_id"
+                reference="categories"
+              >
+                <SelectInput optionText="name" />
+              </ReferenceInput>
+            </Grid>
+            <Grid item xs={6}>
+              {/* {path_image ? (
+                <img
+                  src={`${URL_S3}${path_image}`}
+                  width="200px"
+                  height="200px"
+                  className="custom-img-field"
+                />
+              ) : null} */}
+              {/* <S3File
+                idComponent="category-image"
+                path="categories"
+                handleUploadFinish={this.handleUploadFinish}
+                id={this.props.match.id}
+              /> */}
+            </Grid>
           </Grid>
-          <Grid item xl={6} spacing={6}>
-            <ReferenceInput
-              label="Padre"
-              source="parent_id"
-              reference="products-categories"
-            >
-              <SelectInput optionText="name" />
-            </ReferenceInput>
-          </Grid>
-        </Grid>
-        {/* <Grid item xs={12}>
-          <Paper fullWidth>Hola</Paper>
-        </Grid> */}
-      </SimpleForm>
-    </div>
-  );
-};
-export default ProductsCategoriesEdit;
+        </SimpleForm>
+      </Edit>
+    );
+  }
+}
