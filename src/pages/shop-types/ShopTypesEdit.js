@@ -6,7 +6,7 @@ import {
   TextInput,
   useEditController,
   ArrayInput,
-  SimpleFormIterator
+  SimpleFormIterator,
 } from "react-admin";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -15,15 +15,15 @@ import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: 40
+    paddingTop: 40,
   },
   title: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    margin: "1em"
+    margin: "1em",
   },
   form: {
     /*  [theme.breakpoints.up("xs")]: {
@@ -36,10 +36,10 @@ const useStyles = makeStyles(theme => ({
   },
   inlineField: {
     display: "inline-block",
-    width: "50%"
-  }
+    width: "50%",
+  },
 }));
-const MembershipEdit = ({ onCancel, ...props }) => {
+const ShopTypesEdit = ({ onCancel, ...props }) => {
   const classes = useStyles();
   const controllerProps = useEditController(props);
   const history = useHistory();
@@ -91,4 +91,4 @@ const MembershipEdit = ({ onCancel, ...props }) => {
     </div>
   );
 };
-export default MembershipEdit;
+export default ShopTypesEdit;

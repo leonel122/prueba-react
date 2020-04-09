@@ -5,12 +5,12 @@ import {
   TextInput,
   NumberInput,
   SimpleFormIterator,
-  ArrayInput
+  ArrayInput,
 } from "react-admin";
 import { Grid } from "@material-ui/core";
 import { Title } from ".";
 
-export default class ConfigurationCreate extends Component {
+export default class ShopTypesCreate extends Component {
   render() {
     return (
       <Create {...this.props} title="Crear Membresia">

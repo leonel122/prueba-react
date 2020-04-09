@@ -58,6 +58,13 @@ export default class Menu extends Component {
             onClick={onMenuClick}
             leftIcon={<CardMembership type="read" />}
           />
+          <MenuItemLink
+            className={"menuItems"}
+            to={`/shops-types`}
+            primaryText={"Tipos de tiendas"}
+            onClick={onMenuClick}
+            leftIcon={<CardMembership type="read" />}
+          />
         </SubMenu>
         <MenuItemLink
           className={"menuItems"}
