@@ -57,7 +57,7 @@ const ShopTypesEdit = ({ onCancel, ...props }) => {
   return (
     <div className={classes.root}>
       <div className={classes.title}>
-        <Typography variant="h6">Editar membresia</Typography>
+        <Typography variant="h6">Editar Tipo de tienda</Typography>
         <IconButton onClick={handleOnCancel}>
           <CloseIcon />
         </IconButton>
@@ -76,17 +76,7 @@ const ShopTypesEdit = ({ onCancel, ...props }) => {
           <Grid item xl={6} spacing={6}>
             <TextInput source="name" label="Nombre" />
           </Grid>
-          <Grid item xl={6} spacing={6}>
-            <ArrayInput source="features" label="Caracteristicas">
-              <SimpleFormIterator>
-                <TextInput source="name" label="Nombre" />
-              </SimpleFormIterator>
-            </ArrayInput>
-          </Grid>
         </Grid>
-        {/* <Grid item xs={12}>
-          <Paper fullWidth>Hola</Paper>
-        </Grid> */}
       </SimpleForm>
     </div>
   );

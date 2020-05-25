@@ -37,16 +37,16 @@ const ShopTypesList = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const handleClose = useCallback(() => {
-    history.push("/memberships");
+    history.push("/shops-types");
   }, [history]);
 
   const handleAdd = useCallback(() => {
-    history.push("/memberships");
+    history.push("/shops-types");
   }, [history]);
 
   return (
     <div>
-      <Route path="/memberships/:id">
+      <Route path="/shops-types/:id">
         {({ match }) => {
           const isMatch = !!(
             match &&
@@ -59,15 +59,11 @@ const ShopTypesList = (props) => {
                 {...props}
                 title={<Title />}
                 exporter={false}
-                sort={{ field: "priority", order: "DESC" }}
                 // filters={<MembreshipFilter />}
               >
                 <Datagrid rowClick="edit" optimized {...props}>
                   <TextField source="id" />
                   <TextField label="Nombre" source="name" />
-                  <TextField label="Precio" source="price" />
-                  <TextField label="Dias de duración" source="duration_days" />
-                  <TextField label="Prioridad" source="priority" />
                   <EditButton label="Editar" />
                 </Datagrid>
               </List>

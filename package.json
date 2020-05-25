@@ -33,7 +33,7 @@
     "react-final-form": "^6.3.5",
     "react-router-dom": "^5.1.2",
     "react-s3-uploader": "^4.9.0",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.0",
     "react-spring": "^8.0.27",
     "react-uuid": "^1.0.2",
     "styled-components": "^5.0.0"
