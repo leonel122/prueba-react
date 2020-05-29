@@ -26,7 +26,7 @@ export default class ImageField extends Component {
     super(props);
   }
   state = {
-    image: null
+    image: null,
   };
   componentDidMount() {
     //alert(JSON.stringify(this.props));
@@ -34,17 +34,17 @@ export default class ImageField extends Component {
   componentWillMount() {
     let { value, record, source } = this.props;
 
-    this.setState({
-      image: value || record[source]
-    });
+    // this.setState({
+    //   image: value || record[source],
+    // });
   }
   componentWillReceiveProps(nextProps) {
     let { source, record = {}, value } = nextProps;
     let { image } = this.state;
     if (value !== image) {
-      this.setState({
-        image: value || record[source]
-      });
+      // this.setState({
+      //   image: value || record[source]
+      // });
     }
   }
   render() {
@@ -57,7 +57,7 @@ export default class ImageField extends Component {
               className="image-bg"
               style={{
                 background: `url(${URL_S3}/${image})`,
-                backgroundSize: "contain"
+                backgroundSize: "contain",
               }}
             />
           </Container>

@@ -6,7 +6,7 @@ import ImageField from "../components/ImageField";
 import { URL_S3, URL_S3_SERVER } from "../constants";
 import styled from "styled-components";
 
-import uuid from 'react-uuid'
+import uuid from "react-uuid";
 
 const Container = styled.div`
   /* background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%); */
@@ -34,40 +34,21 @@ class S3Field extends Component {
   state = {
     progress: null,
     image: null,
-    onChange: null
+    onChange: null,
   };
-
-  componentWillReceiveProps({ record, source, value, ...props }) {
-    this.setState({
-      image: value || record[source]
-    });
-  }
-  componentDidMount() {
-    let { record, source, match, value } = this.props;
-
-    this.setState({
-      image: record[source] || value,
-      id: match.params.id || uuid()
-    });
-  }
-  onUploadStart = (file, next) => {
-    this.setState({ name_file: file.name });
-    next(file);
-  };
-
-  onSignedUrl = (...props) => { };
+  onSignedUrl = (...props) => {};
 
   onUploadProgress = (progress, ...props) => {
     this.setState({ progress });
   };
 
-  onUploadError = error => { };
+  onUploadError = (error) => {};
 
-  onUploadFinish = urls => {
+  onUploadFinish = (urls) => {
     let { onChange, id } = this.props;
     let image = urls.fileKey;
     this.setState({
-      image
+      image,
     });
     if (onChange) onChange(image, id);
   };
@@ -95,7 +76,7 @@ class S3Field extends Component {
             signingUrl="/s3Client/sign"
             signingUrlMethod="GET"
             accept="*/*"
-            s3path={`${this.props.path}/${id}/${this.props.finalPath}/`}
+            s3path={`${id}/${this.props.finalPath}/`}
             preprocess={this.onUploadStart}
             onSignedUrl={this.onSignedUrl}
             onProgress={this.onUploadProgress}
@@ -104,7 +85,7 @@ class S3Field extends Component {
             signingUrlWithCredentials={true} // in case when need to pass authentication credentials via CORS
             uploadRequestHeaders={{ "x-amz-acl": "public-read" }} // this is the default
             contentDisposition="auto"
-            scrubFilename={filename => filename.replace(/[^\w\d_\-.]+/gi, "")}
+            scrubFilename={(filename) => filename.replace(/[^\w\d_\-.]+/gi, "")}
             server={URL_S3_SERVER}
             // inputRef={cmp => this.uploadInput = cmp}
             autoUpload={true}

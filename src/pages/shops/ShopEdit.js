@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import {
-  Create,
+  Edit,
   SimpleForm,
   TextInput,
   ReferenceInput,
   SelectInput,
   NumberInput,
+  SimpleShowLayout,
+  CheckboxGroupInput,
 } from "react-admin";
-import { Grid } from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
+import { Title } from "./";
+/* import {
+  segmentationsService,
+  companiesSegmentationsService,
+  companiesService
+} from "../../connections/feathers"; */
+/* 
+import { S3File } from "../s3/"; */
 
 const YearExperienceList = [
   { id: "1-3", name: "1-3" },
@@ -24,10 +34,10 @@ const StatusTypes = [
   { id: "Bloqueada", name: "Bloqueada" },
 ];
 
-export default class ShopCreate extends Component {
+export default class CompanyEdit extends Component {
   render() {
     return (
-      <Create title="Crear una empresa" {...this.props}>
+      <Edit title={<Title />} {...this.props}>
         <SimpleForm>
           <Grid container fullWidth spacing={16}>
             <Grid item xs={4}>
@@ -67,7 +77,7 @@ export default class ShopCreate extends Component {
             </Grid>
           </Grid>
         </SimpleForm>
-      </Create>
+      </Edit>
     );
   }
 }

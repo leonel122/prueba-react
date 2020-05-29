@@ -80,6 +80,13 @@ export default class Menu extends Component {
           onClick={onMenuClick}
           leftIcon={<Icon type="user-add" />}
         />
+        <MenuItemLink
+          className={"menuItems"}
+          to={`/products`}
+          primaryText={"Productos"}
+          onClick={onMenuClick}
+          leftIcon={<Icon type="user-add" />}
+        />
         <Responsive
           small={logout}
           medium={null} // Pass null to render nothing on larger devices

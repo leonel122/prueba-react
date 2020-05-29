@@ -11,7 +11,7 @@ const authClient = feathersAuthClient({
   jwtStrategy: "jwt",
   entity: "user",
   service: "users",
-  storage: window.localStorage
+  storage: window.localStorage,
 });
 api.configure(restClient.fetch(window.fetch.bind(window)));
 api.configure(authClient);
@@ -28,4 +28,5 @@ export const companyProductsCategories = api.service(
 );
 
 export const dealsService = api.service("deals");
+export const productsService = api.service("products");
 export default api;

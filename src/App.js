@@ -15,7 +15,8 @@ import {
 } from "./pages/categories/products";
 import { UnitMeasureList, UnitMeasureCreate } from "./pages/unit-measure";
 import { ShopTypesCreateCreate, ShopTypesCreateList } from "./pages/shop-types";
-import { ShopList, ShopCreate } from "./pages/shops";
+import { ShopList, ShopCreate, ShopEdit } from "./pages/shops";
+import { ListProduct, ProductCreate, ProductEdit } from "./pages/products";
 import Layout from "./layouts/Layout";
 
 const restClientOptions = {
@@ -62,7 +63,18 @@ const App = () => (
       list={ShopTypesCreateList}
       create={ShopTypesCreateCreate}
     />
-    <Resource name="shops" list={ShopList} create={ShopCreate} />
+    <Resource
+      name="shops"
+      list={ShopList}
+      create={ShopCreate}
+      edit={ShopEdit}
+    />
+    <Resource
+      name="products"
+      list={ListProduct}
+      create={ProductCreate}
+      edit={ProductEdit}
+    />
   </Admin>
 );
 export default App;
