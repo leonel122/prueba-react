@@ -29,4 +29,5 @@ export const companyProductsCategories = api.service(
 
 export const dealsService = api.service("deals");
 export const productsService = api.service("products");
+export const shopService = api.service("shops");
 export default api;

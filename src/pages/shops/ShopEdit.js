@@ -10,7 +10,10 @@ import {
   CheckboxGroupInput,
 } from "react-admin";
 import Grid from "@material-ui/core/Grid";
+import S3File from "../../components/S3-field";
+import { URL_S3 } from "../../constants";
 import { Title } from "./";
+import { shopService } from "../../utils/Api";
 /* import {
   segmentationsService,
   companiesSegmentationsService,
@@ -35,7 +38,32 @@ const StatusTypes = [
 ];
 
 export default class CompanyEdit extends Component {
+  state = {
+    path_image: null,
+    expanded: false,
+  };
+
+  async fetchData() {
+    console.log(this.props);
+    shopService
+      .get(this.props.id)
+      .then((it) => this.setState({ path_image: it.logo }));
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  handleUploadFinish = async (url, id) => {
+    console.log(url, "----------");
+    await shopService
+      .patch(this.props.id, { logo: url })
+      .then((it) => this.fetchData());
+  };
+
   render() {
+    const { path_image } = this.state;
+
     return (
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
@@ -74,6 +102,22 @@ export default class CompanyEdit extends Component {
               <TextInput source="web_site" label="Sitio web" fullWidth />
               <NumberInput source="lat" label="Latitud" fullWidth />
               <NumberInput source="long" label="Longitud" fullWidth />
+            </Grid>
+            <Grid item xs={6}>
+              {path_image ? (
+                <img
+                  src={`${URL_S3}${path_image}`}
+                  width="200px"
+                  height="200px"
+                  className="custom-img-field"
+                />
+              ) : null}
+              <S3File
+                idComponent="category-image"
+                path="categories"
+                handleUploadFinish={this.handleUploadFinish}
+                id={this.props.id}
+              />
             </Grid>
           </Grid>
         </SimpleForm>

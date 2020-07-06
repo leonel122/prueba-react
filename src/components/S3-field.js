@@ -50,12 +50,12 @@ class S3Field extends Component {
     this.setState({
       image,
     });
-    if (onChange) onChange(image, id);
+    this.props.handleUploadFinish(image);
   };
 
   render() {
-    let { file = {}, match, label, source } = this.props;
-    const { image, id } = this.state;
+    let { file = {}, match, label, source, id } = this.props;
+    const { image } = this.state;
 
     if (file.name) return <div className="s3Button mr-2">{file.name}</div>;
     return (
@@ -76,7 +76,7 @@ class S3Field extends Component {
             signingUrl="/s3Client/sign"
             signingUrlMethod="GET"
             accept="*/*"
-            s3path={`${id}/${this.props.finalPath}/`}
+            s3path={`products/${id}/`}
             preprocess={this.onUploadStart}
             onSignedUrl={this.onSignedUrl}
             onProgress={this.onUploadProgress}

@@ -23,7 +23,7 @@ export default class CompanyEdit extends Component {
     console.log(this.props);
     productsService
       .get(this.props.id)
-      .then((it) => this.setState({ path_image: it.path_image }));
+      .then((it) => this.setState({ path_image: it.image }));
   }
 
   componentDidMount() {
@@ -31,10 +31,9 @@ export default class CompanyEdit extends Component {
   }
 
   handleUploadFinish = async (url, id) => {
-    console.log(url);
-    console.log(this.props);
+    console.log(url, "----------");
     await productsService
-      .patch(this.props.id, { path_image: url })
+      .patch(this.props.id, { image: url })
       .then((it) => this.fetchData());
   };
 
@@ -84,6 +83,17 @@ export default class CompanyEdit extends Component {
                 label="Descripcion"
               />
             </Grid>
+            <Grid item xs={4}>
+              <SelectInput
+                fullWidth
+                source="status"
+                label="Estado"
+                choices={[
+                  { id: "active", name: "Activa" },
+                  { id: "inactive", name: "Inactiva" },
+                ]}
+              />
+            </Grid>
             <Grid item xs={6}>
               {path_image ? (
                 <img
@@ -97,7 +107,7 @@ export default class CompanyEdit extends Component {
                 idComponent="category-image"
                 path="categories"
                 handleUploadFinish={this.handleUploadFinish}
-                id={this.props.match.id}
+                id={this.props.id}
               />
             </Grid>
           </Grid>
