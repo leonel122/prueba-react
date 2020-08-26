@@ -37,6 +37,11 @@ const StatusTypes = [
   { id: "Bloqueada", name: "Bloqueada" },
 ];
 
+const CurrentStatus = [
+  { id: "open", name: "Abierta" },
+  { id: "close", name: "Cerrada" },
+];
+
 export default class CompanyEdit extends Component {
   state = {
     path_image: null,
@@ -68,19 +73,64 @@ export default class CompanyEdit extends Component {
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
           <Grid container fullWidth spacing={16}>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6} container>
               <TextInput source="name" label="Razón social" fullWidth />
-              <TextInput source="address" label="dirección" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput source="nit" label="Nit" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput source="phone" label="Telefono" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                source="link_facebook"
+                label="Link facebook"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                source="link_instagram"
+                label="Link Instagram"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <ReferenceInput
+                label="Categoria"
+                source="category_id"
+                reference="categories"
+                // filter={{ id: { $gt: 1 } }}
+              >
+                <SelectInput optionText="name" fullWidth />
+              </ReferenceInput>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <SelectInput
+                fullWidth
+                source="current_status"
+                label="Estado"
+                choices={CurrentStatus}
+                optionText="name"
+                optionValue="id"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
               <SelectInput
                 fullWidth
                 source="status"
-                label="Estado"
+                label="Estado real"
                 choices={StatusTypes}
                 optionText="name"
                 optionValue="id"
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
+              <TextInput source="address" label="dirección" fullWidth />
+            </Grid>
+
+            <Grid item xs={12} md={6}>
               <ReferenceInput
                 label="Usuario"
                 source="user_id"
@@ -88,20 +138,6 @@ export default class CompanyEdit extends Component {
               >
                 <SelectInput optionText="first_name" fullWidth />
               </ReferenceInput>
-            </Grid>
-            <Grid item xs={4}>
-              <ReferenceInput
-                label="Tipo de tienda"
-                source="shop_type_id"
-                reference="shops-types"
-              >
-                <SelectInput optionText="name" fullWidth />
-              </ReferenceInput>
-            </Grid>
-            <Grid item xs={4} alignContent="flex-start">
-              <TextInput source="web_site" label="Sitio web" fullWidth />
-              <NumberInput source="lat" label="Latitud" fullWidth />
-              <NumberInput source="long" label="Longitud" fullWidth />
             </Grid>
             <Grid item xs={6}>
               {path_image ? (

@@ -39,10 +39,13 @@ class S3Field extends Component {
   onSignedUrl = (...props) => {};
 
   onUploadProgress = (progress, ...props) => {
+    console.log(progress);
     this.setState({ progress });
   };
 
-  onUploadError = (error) => {};
+  onUploadError = (error) => {
+    console.log(error);
+  };
 
   onUploadFinish = (urls) => {
     let { onChange, id } = this.props;

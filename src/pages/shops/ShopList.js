@@ -1,20 +1,12 @@
 import React from "react";
-import {
-  List,
-  Datagrid,
-  TextField,
-  EditButton,
-  ShowButton,
-  Filter,
-  TextInput,
-  ReferenceField,
-} from "react-admin";
 
-const CompanyFilter = (props) => (
-  <Filter {...props}>
-    <TextInput label="Razón social" source="name" alwaysOn />
-  </Filter>
-);
+import { List, Datagrid, TextField, EditButton, ShowButton } from "react-admin";
+
+const CurrentStatusField = ({ source, record = {} }) => {
+  return `${record.current_status == "open" ? "Abierta" : "Cerrada"} `;
+};
+
+CurrentStatusField.defaultProps = { label: "Estado" };
 
 const ShopList = (props) => {
   return (
@@ -22,17 +14,10 @@ const ShopList = (props) => {
       <Datagrid>
         <TextField source="id" label="id" />
         <TextField source="name" label="Nombre" />
-        {/* <TextField source="nit" label="Nit" /> */}
-        <TextField source="status" label="Estado" />
-        <ReferenceField
-          label="Tipo de tienda"
-          source="shops-types"
-          reference="shop_type_id"
-        >
-          <TextField source="name" />
-        </ReferenceField>
+        <TextField source="nit" label="Nit" />
+        <CurrentStatusField />
+        <TextField source="category.name" label="Categoria" />
         <EditButton label="Editar" />
-        <ShowButton label="Ver" />
       </Datagrid>
     </List>
   );

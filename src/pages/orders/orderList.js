@@ -3,40 +3,67 @@ import {
   List,
   Datagrid,
   TextField,
-  EditButton,
+  SelectInput,
   ShowButton,
   Filter,
   TextInput,
   ReferenceField,
 } from "react-admin";
 
-const CompanyFilter = (props) => (
+const Status = [
+  { id: 1, name: "Pendiente" },
+  { id: 2, name: "Aceptado" },
+  { id: 3, name: "Enviado" },
+  { id: 4, name: "Rechazado" },
+  { id: 5, name: "Entregado" },
+];
+
+const Filters = (props) => (
   <Filter {...props}>
-    <TextInput label="Razón social" source="name" alwaysOn />
+    <TextInput label="Busca lo que quieras" source="search" alwaysOn />
+    <SelectInput
+      fullWidth
+      source="order_status_id"
+      label="Estado"
+      choices={Status}
+      optionText="name"
+      optionValue="id"
+      alwaysOn
+    />
   </Filter>
 );
 
+const UserNameField = ({ source, record = {} }) => {
+  return `${record.user.first_name} ${record.user.last_name} `;
+};
+
+const StatusField = ({ source, record = {} }) => {
+  return `${
+    record.order_status_id == 1
+      ? "Pendiente"
+      : record.status_id == 2
+      ? "Aceptado"
+      : record.status_id == 3
+      ? "Enviado"
+      : "Rechazado"
+  } `;
+};
+
 const orderList = (props) => {
   return (
-    <List {...props} /* filters={<CompanyFilter />} */ exporter={false}>
+    <List
+      {...props}
+      filters={<Filters />}
+      sort={{ field: "id", order: "DESC" }}
+    >
       <Datagrid>
         <TextField source="id" label="id" />
-        <ReferenceField label="Tienda" source="shop_id" reference="shops">
-          <TextField source="name" />
-        </ReferenceField>
-        <ReferenceField label="Usuario`" source="user_id" reference="users">
-          <TextField source="first_name" />
-        </ReferenceField>
-        {/* <TextField source="nit" label="Nit" /> */}
-        <ReferenceField
-          label="Estado"
-          source="order_status_id"
-          reference="order-statuses"
-        >
-          <TextField source="name" />
-        </ReferenceField>
+        <TextField source="shop_id" label="id" />
+        <TextField source="shop.name" label="Tienda" />
+        <UserNameField label="Cliente" />
+        <TextField source="user.phone" label="Telefono" />
+        <StatusField label="Estado" />
         <TextField source="value" />
-        <EditButton label="Editar" />
         <ShowButton label="Ver" />
       </Datagrid>
     </List>

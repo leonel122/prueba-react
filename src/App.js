@@ -17,8 +17,14 @@ import { UnitMeasureList, UnitMeasureCreate } from "./pages/unit-measure";
 import { ShopTypesCreateCreate, ShopTypesCreateList } from "./pages/shop-types";
 import { ShopList, ShopCreate, ShopEdit } from "./pages/shops";
 import { ListProduct, ProductCreate, ProductEdit } from "./pages/products";
-import { orderList } from "./pages/orders/";
+import { orderList, orderShow } from "./pages/orders/";
 import Layout from "./layouts/Layout";
+import {
+  ShippingCostList,
+  ShippingCreate,
+  ShippingCostEdit,
+} from "./pages/shipping-cost";
+import authProvider from "./authProvider";
 
 const restClientOptions = {
   usePatch: true,
@@ -30,6 +36,8 @@ const authClientOptions = {
   permissionsKey: "permissions",
   permissionsField: "roles",
   redirectTo: "/login",
+  passwordField: "password",
+  usernameField: "phone",
 };
 const history = createHashHistory();
 //const App = () => <Admin dataProvider={dataProvider} />;
@@ -70,14 +78,21 @@ const App = () => (
       create={ShopCreate}
       edit={ShopEdit}
     />
-    <Resource name="orders" list={orderList} />
+    <Resource name="orders" list={orderList} show={orderShow} />
     <Resource
       name="products"
       list={ListProduct}
       create={ProductCreate}
       edit={ProductEdit}
     />
+    <Resource
+      name="shipping-cost"
+      list={ShippingCostList}
+      create={ShippingCreate}
+      edit={ShippingCostEdit}
+    />
     <Resource name="order-statuses" />
+    <Resource name="localities" />
   </Admin>
 );
 export default App;

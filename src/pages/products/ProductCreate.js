@@ -13,42 +13,26 @@ import { Title } from ".";
 export default class ProductCreate extends Component {
   render() {
     return (
-      <Create {...this.props} title="Crear tipo de tienda">
+      <Create {...this.props} title="Crear producto">
         <SimpleForm>
           <Grid fullWidth container spacing={3}>
-            <Grid item xs={12} md={6} spacing={6}>
+            <Grid item xs={12} md={6} spacing={3}>
               <TextInput fullWidth source="name" label="Nombre" />
             </Grid>
-            <Grid item xs={4}>
-              <ReferenceInput
-                label="Unidad de medida"
-                source="unit_measure_id"
-                reference="unit-measure"
-              >
-                <SelectInput optionText="name" fullWidth />
-              </ReferenceInput>
-            </Grid>
-            <Grid item xs={4}>
-              <ReferenceInput
-                label="Categoria"
-                source="category_id"
-                reference="categories"
-              >
-                <SelectInput optionText="name" fullWidth />
-              </ReferenceInput>
-            </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
               <ReferenceInput label="Tienda" source="shop_id" reference="shops">
                 <SelectInput optionText="name" fullWidth />
               </ReferenceInput>
             </Grid>
-            <Grid item xs={4}>
-              <NumberInput fullWidth source="value" label="Price" />
+            <Grid item xs={12} md={2}>
+              <NumberInput
+                fullWidth
+                source="value"
+                label="Price"
+                type="number"
+              />
             </Grid>
-            <Grid item xs={4}>
-              <NumberInput fullWidth source="quantity" label="Cantidad" />
-            </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={10}>
               <TextInput
                 multiline
                 fullWidth

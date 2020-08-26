@@ -46,36 +46,15 @@ export default class CompanyEdit extends Component {
             <Grid item xs={12} md={6} spacing={6}>
               <TextInput fullWidth source="name" label="Nombre" />
             </Grid>
-            <Grid item xs={4}>
-              <ReferenceInput
-                label="Unidad de medida"
-                source="unit_measure_id"
-                reference="unit-measure"
-              >
-                <SelectInput optionText="name" fullWidth />
-              </ReferenceInput>
-            </Grid>
-            <Grid item xs={4}>
-              <ReferenceInput
-                label="Categoria"
-                source="category_id"
-                reference="categories"
-              >
-                <SelectInput optionText="name" fullWidth />
-              </ReferenceInput>
-            </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
               <ReferenceInput label="Tienda" source="shop_id" reference="shops">
                 <SelectInput optionText="name" fullWidth />
               </ReferenceInput>
             </Grid>
-            <Grid item xs={4}>
-              <NumberInput fullWidth source="value" label="Price" />
+            <Grid item xs={12} md={6}>
+              <NumberInput fullWidth source="value" label="Precio" />
             </Grid>
-            <Grid item xs={4}>
-              <NumberInput fullWidth source="quantity" label="Cantidad" />
-            </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
               <TextInput
                 multiline
                 fullWidth
@@ -83,7 +62,7 @@ export default class CompanyEdit extends Component {
                 label="Descripcion"
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} md={6}>
               <SelectInput
                 fullWidth
                 source="status"
@@ -94,21 +73,26 @@ export default class CompanyEdit extends Component {
                 ]}
               />
             </Grid>
-            <Grid item xs={6}>
-              {path_image ? (
-                <img
-                  src={`${URL_S3}${path_image}`}
-                  width="200px"
-                  height="200px"
-                  className="custom-img-field"
+            <Grid item xs={12} style={{ textAlign: "center" }}>
+              <div>
+                {path_image ? (
+                  <img
+                    src={`${URL_S3}${path_image}`}
+                    // width="100%"
+                    width="300"
+                    height="300"
+                    className="custom-img-field"
+                  />
+                ) : null}
+              </div>
+              <div style={{ marginTop: 10 }}>
+                <S3File
+                  idComponent="category-image"
+                  path="categories"
+                  handleUploadFinish={this.handleUploadFinish}
+                  id={this.props.id}
                 />
-              ) : null}
-              <S3File
-                idComponent="category-image"
-                path="categories"
-                handleUploadFinish={this.handleUploadFinish}
-                id={this.props.id}
-              />
+              </div>
             </Grid>
           </Grid>
         </SimpleForm>
