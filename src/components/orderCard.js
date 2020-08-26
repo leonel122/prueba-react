@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import moment from "moment";
 
 const useStyles = makeStyles({
   root: {
@@ -24,7 +24,6 @@ const useStyles = makeStyles({
 export default function MediaCard({ ...props }) {
   const classes = useStyles();
 
-  console.log(props, "---------------");
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -32,6 +31,23 @@ export default function MediaCard({ ...props }) {
           <div>
             <Typography gutterBottom variant="h5" component="h2">
               Orden No. {props.order ? props.order.order.id : "No encontrado"}
+            </Typography>
+          </div>
+          <div className={classes.description}>
+            <Typography variant="body1" color="textSecondary" component="p">
+              Fecha
+            </Typography>
+            <Typography
+              variant="body1"
+              color="textSecondary"
+              component="p"
+              aling="left"
+            >
+              {props.order
+                ? moment(props.order.order.createdAt).format(
+                    "YYYY-MM-DD HH:mm:ss"
+                  )
+                : "No encontrado"}
             </Typography>
           </div>
           <div className={classes.description}>
@@ -82,7 +98,7 @@ export default function MediaCard({ ...props }) {
                     ? "green"
                     : props.order.order.order_status_id == 4
                     ? "red"
-                    : "No encontrado"
+                    : "green"
                   : "gray",
               }}
             >
@@ -92,30 +108,57 @@ export default function MediaCard({ ...props }) {
                   : props.order.order.order_status_id == 2
                   ? "Aceptada"
                   : props.order.order.order_status_id == 3
-                  ? "send"
+                  ? "Enviada"
                   : props.order.order.order_status_id == 4
                   ? "Rechazada"
-                  : "No encontrado"
+                  : "Entregada"
+                : "No encontrado"}
+            </Typography>
+          </div>
+          <div className={classes.description}>
+            <Typography variant="body1" color="textSecondary" component="p">
+              Ultima actualización
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {props.order
+                ? moment(props.order.order.updatedAt).format(
+                    "YYYY-MM-DD HH:mm:ss"
+                  )
                 : "No encontrado"}
             </Typography>
           </div>
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.description}>
-        <Button
-          size="mediun"
-          color="primary"
-          style={{ backgroundColor: "green", color: "white" }}
-        >
-          Aceptar
-        </Button>
-        <Button
-          size="small"
-          color="primary"
-          style={{ backgroundColor: "red", color: "white" }}
-        >
-          Rechazar
-        </Button>
+        {props.order &&
+          props.order.order.order_status_id != 4 &&
+          props.order.order.order_status_id != 5 && (
+            <Button
+              size="mediun"
+              color="primary"
+              style={{ backgroundColor: "green", color: "white" }}
+              onClick={() => props.handleUpdate()}
+            >
+              {props.order && props.order.order.order_status_id == 1
+                ? "Aceptar"
+                : props.order.order.order_status_id == 2
+                ? "enviar"
+                : props.order.order.order_status_id == 3
+                ? "Marcar entrega"
+                : "Indefinido"}
+            </Button>
+          )}
+
+        {props.order && props.order.order.order_status_id == 1 && (
+          <Button
+            size="small"
+            color="primary"
+            style={{ backgroundColor: "red", color: "white" }}
+            onClick={() => props.handleRejected()}
+          >
+            Rechazar
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

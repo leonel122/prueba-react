@@ -28,22 +28,21 @@ export default function SimpleTable({ ...props }) {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>id</TableCell>
-            <TableCell align="right">nombre del producto</TableCell>
-            <TableCell align="right">cantidad&nbsp;(g)</TableCell>
-            <TableCell align="right"></TableCell>
+            <TableCell align="center">id</TableCell>
+            <TableCell align="center">nombre del producto</TableCell>
+            <TableCell align="center">cantidad</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.orderDetails.map((row) => (
             <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" align="center">
                 {row.id}
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="center">
                 {JSON.parse(row.meta_product).name}
               </TableCell>
-              <TableCell align="right">{row.quantity}</TableCell>
+              <TableCell align="center">{row.quantity}</TableCell>
             </TableRow>
           ))}
         </TableBody>

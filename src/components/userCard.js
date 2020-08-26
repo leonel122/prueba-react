@@ -31,7 +31,7 @@ export default function MediaCard({ ...props }) {
         <CardContent>
           <div>
             <Typography gutterBottom variant="h5" component="h2">
-              Informacion del comprador
+              Información del comprador
             </Typography>
           </div>
           <div className={classes.description}>

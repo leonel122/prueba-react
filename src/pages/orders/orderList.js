@@ -7,7 +7,7 @@ import {
   ShowButton,
   Filter,
   TextInput,
-  ReferenceField,
+  DateField,
 } from "react-admin";
 
 const Status = [
@@ -41,9 +41,9 @@ const StatusField = ({ source, record = {} }) => {
   return `${
     record.order_status_id == 1
       ? "Pendiente"
-      : record.status_id == 2
+      : record.order_status_id == 2
       ? "Aceptado"
-      : record.status_id == 3
+      : record.order_status_id == 3
       ? "Enviado"
       : "Rechazado"
   } `;
@@ -63,6 +63,7 @@ const orderList = (props) => {
         <UserNameField label="Cliente" />
         <TextField source="user.phone" label="Telefono" />
         <StatusField label="Estado" />
+        <DateField source="createdAt" label="fecha" />
         <TextField source="value" />
         <ShowButton label="Ver" />
       </Datagrid>
