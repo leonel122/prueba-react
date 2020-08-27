@@ -65,6 +65,7 @@ const orderList = (props) => {
         <StatusField label="Estado" />
         <DateField source="createdAt" label="fecha" />
         <TextField source="value" />
+        <TextField source="shipping_cost" label="costo de envio" />
         <ShowButton label="Ver" />
       </Datagrid>
     </List>

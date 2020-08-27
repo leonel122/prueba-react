@@ -6,26 +6,26 @@ import { Drawer, makeStyles } from "@material-ui/core";
 
 import UserEdit from "./UserEdit";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   list: {
     flexGrow: 1,
     transition: theme.transitions.create(["all"], {
-      duration: theme.transitions.duration.enteringScreen
+      duration: theme.transitions.duration.enteringScreen,
     }),
-    marginRight: 0
+    marginRight: 0,
   },
   listWithDrawer: {
-    marginRight: 400
+    marginRight: 400,
   },
   drawerPaper: {
-    zIndex: 100
-  }
+    zIndex: 100,
+  },
 }));
 
-const UserList = props => {
+const UserList = (props) => {
   const [isMatch, setIsMatch] = useState(false);
   const classes = useStyles();
   const history = useHistory();
@@ -51,10 +51,10 @@ const UserList = props => {
                 /*  filters={<GuideFilter />} */
               >
                 <Datagrid rowClick="edit" optimized {...props}>
-                  <TextField source="id" />
+                  <TextField source="id" disable />
                   <TextField label="Nombre" source="first_name" />
                   <TextField label="Apellido" source="last_name" />
-                  <TextField label="Apellido" source="last_name" />
+                  <TextField label="Telefono" source="phone" />
                   <EmailField source="email" />
                   <TextField source="status" label="Estado" />
                   <EditButton label="Editar" />
@@ -74,7 +74,7 @@ const UserList = props => {
                 anchor="right"
                 onClose={handleClose}
                 classes={{
-                  paper: classes.drawerPaper
+                  paper: classes.drawerPaper,
                 }}
               >
                 {isMatch ? (

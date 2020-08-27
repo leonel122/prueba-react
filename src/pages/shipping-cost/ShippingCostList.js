@@ -34,6 +34,7 @@ const ShopList = (props) => {
         <TextField source="id" label="id" />
         <TextField source="shop.name" label="Tienda" />
         <TextField source="locality.name" label="Localidad" />
+        <TextField source="price" label="Precio" />
         <EditButton label="Editar" />
         <DeleteButton label="Eliminar" />
       </Datagrid>

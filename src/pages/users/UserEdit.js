@@ -83,27 +83,29 @@ const UserEdit = ({ onCancel, ...props }) => {
         version={controllerProps.version}
         redirect="list"
         resource="users"
+        delete={false}
       >
-        <TextInput fullWidth source="id" label="id" />
+        <TextInput fullWidth source="id" label="id" disabled />
         <Grid fullWidth spacing={16}>
-          <Grid item xl={6} spacing={6}>
-            <TextInput source="first_name" label="Nombre" />
-            <TextInput source="last_name" label="Apellido" />
+          <Grid item xs={12} spacing={6}>
+            <TextInput source="first_name" label="Nombre" fullWidth />
+            <TextInput source="last_name" label="Apellido" fullWidth />
           </Grid>
-          <Grid item xl={6} spacing={6}>
-            <TextInput source="phone" label="Telefono" />
+          <Grid item xs={12} spacing={6}>
+            <TextInput source="phone" label="Telefono" fullWidth />
           </Grid>
-          <Grid item xl={6} spacing={6}>
-            <SelectInput
-              source="status"
-              label="Estado"
-              choices={statusList}
-              optionText="description"
-              optionValue="value"
-            />
-            <TextInput source="email" />
-            <PasswordInput source="password" label="Contraseña" />
+          <Grid item xl={12} spacing={6}>
+            <TextInput source="email" fullWidth />
           </Grid>
+          <SelectInput
+            source="status"
+            label="Estado"
+            choices={statusList}
+            optionText="description"
+            optionValue="value"
+            fullWidth
+          />
+          <PasswordInput source="password" label="Contraseña" fullWidth />
         </Grid>
         {/* <Grid item xs={12}>
           <Paper fullWidth>Hola</Paper>

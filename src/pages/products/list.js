@@ -16,6 +16,7 @@ const Status = [
 
 const Filters = (props) => (
   <Filter {...props}>
+    <TextInput label="Nombre" source="search" alwaysOn />
     <SelectInput
       fullWidth
       source="status"
@@ -40,6 +41,7 @@ const ShopList = (props) => {
         <TextField source="name" label="Nombre" />
         <StatusField source="status" label="Estado" />
         <TextField source="shop.name" label="Tienda" />
+        <TextField source="value" label="precio" />
         <EditButton label="Editar" />
       </Datagrid>
     </List>

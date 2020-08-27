@@ -20,7 +20,12 @@ export default class ProductCreate extends Component {
               <TextInput fullWidth source="name" label="Nombre" />
             </Grid>
             <Grid item xs={12} md={6}>
-              <ReferenceInput label="Tienda" source="shop_id" reference="shops">
+              <ReferenceInput
+                label="Tienda"
+                source="shop_id"
+                reference="shops"
+                perPage={5000}
+              >
                 <SelectInput optionText="name" fullWidth />
               </ReferenceInput>
             </Grid>

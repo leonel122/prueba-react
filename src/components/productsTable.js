@@ -30,7 +30,9 @@ export default function SimpleTable({ ...props }) {
           <TableRow>
             <TableCell align="center">id</TableCell>
             <TableCell align="center">nombre del producto</TableCell>
+            <TableCell align="center">Precio unitario</TableCell>
             <TableCell align="center">cantidad</TableCell>
+            <TableCell align="center">Total</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,7 +44,13 @@ export default function SimpleTable({ ...props }) {
               <TableCell align="center">
                 {JSON.parse(row.meta_product).name}
               </TableCell>
+              <TableCell align="center">
+                {JSON.parse(row.meta_product).value}
+              </TableCell>
               <TableCell align="center">{row.quantity}</TableCell>
+              <TableCell align="center">
+                {JSON.parse(row.meta_product).value * row.quantity}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

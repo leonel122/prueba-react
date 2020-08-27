@@ -45,13 +45,22 @@ export default class ShopCreate extends Component {
               <TextInput source="phone" label="Telefono" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextInput source="link_facebook" label="Telefono" fullWidth />
+              <TextInput
+                source="link_facebook"
+                label="link facebook"
+                fullWidth
+              />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextInput source="link_instagram" label="Telefono" fullWidth />
+              <TextInput
+                source="link_instagram"
+                label="link instagram"
+                fullWidth
+              />
             </Grid>
             <Grid item xs={12} md={6}>
               <ReferenceInput
+                perPage={1000}
                 label="Categoria"
                 source="category_id"
                 reference="categories"
@@ -86,6 +95,7 @@ export default class ShopCreate extends Component {
 
             <Grid item xs={12} md={6}>
               <ReferenceInput
+                perPage={5000}
                 label="Usuario"
                 source="user_id"
                 reference="users"
