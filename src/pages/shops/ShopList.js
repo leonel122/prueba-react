@@ -28,6 +28,7 @@ const status = [
 
 const Filters = (props) => (
   <Filter {...props}>
+    <TextInput label="Buscador" source="search" alwaysOn />
     <SelectInput
       fullWidth
       source="current_status"

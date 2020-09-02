@@ -79,7 +79,7 @@ class S3Field extends Component {
             signingUrl="/s3Client/sign"
             signingUrlMethod="GET"
             accept="*/*"
-            s3path={`products/${id}/`}
+            s3path={`${this.props.path ? this.props.path : "products/"}${id}/`}
             preprocess={this.onUploadStart}
             onSignedUrl={this.onSignedUrl}
             onProgress={this.onUploadProgress}

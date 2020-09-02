@@ -16,6 +16,8 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import GridOnIcon from "@material-ui/icons/GridOn";
 import ReorderIcon from "@material-ui/icons/Reorder";
+import ImageIcon from "@material-ui/icons/Image";
+import ScheduleIcon from "@material-ui/icons/Schedule";
 
 export default class Menu extends Component {
   state = {
@@ -103,6 +105,27 @@ export default class Menu extends Component {
           primaryText={"Ordenes"}
           onClick={onMenuClick}
           leftIcon={<ReorderIcon />}
+        />
+        <MenuItemLink
+          className={"menuItems"}
+          to={`/banners`}
+          primaryText={"Banners"}
+          onClick={onMenuClick}
+          leftIcon={<ImageIcon />}
+        />
+        <MenuItemLink
+          className={"menuItems"}
+          to={`/schedule`}
+          primaryText={"Horario"}
+          onClick={onMenuClick}
+          leftIcon={<ScheduleIcon />}
+        />
+        <MenuItemLink
+          className={"menuItems"}
+          to={`/cms`}
+          primaryText={"cms"}
+          onClick={onMenuClick}
+          leftIcon={<ScheduleIcon />}
         />
         <Responsive
           small={logout}

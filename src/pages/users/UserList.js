@@ -1,5 +1,14 @@
 import React, { Fragment, useCallback, useState } from "react";
-import { List, Datagrid, TextField, EditButton, EmailField } from "react-admin";
+import {
+  List,
+  Datagrid,
+  TextField,
+  EditButton,
+  EmailField,
+  Filter,
+  TextInput,
+  SelectInput,
+} from "react-admin";
 import { Title } from "./";
 import { Route, useHistory } from "react-router-dom";
 import { Drawer, makeStyles } from "@material-ui/core";
@@ -25,6 +34,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const status = [
+  { id: "active", name: "Activo" },
+  { id: "inactive", name: "inactivo" },
+];
+
+const Filters = (props) => (
+  <Filter {...props}>
+    <TextInput label="Buscador" source="search" alwaysOn />
+    <SelectInput
+      fullWidth
+      source="status"
+      label="Estado actual"
+      choices={status}
+      optionText="name"
+      optionValue="id"
+      alwaysOn
+    />
+  </Filter>
+);
+
 const UserList = (props) => {
   const [isMatch, setIsMatch] = useState(false);
   const classes = useStyles();
@@ -48,7 +77,7 @@ const UserList = (props) => {
                 {...props}
                 title={<Title />}
                 exporter={false}
-                /*  filters={<GuideFilter />} */
+                filters={<Filters />}
               >
                 <Datagrid rowClick="edit" optimized {...props}>
                   <TextField source="id" disable />

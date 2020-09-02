@@ -107,6 +107,9 @@ export default class CompanyEdit extends Component {
               </ReferenceInput>
             </Grid>
             <Grid item xs={12} md={6}>
+              <NumberInput source="priority" label="Prioridad" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6}>
               <SelectInput
                 fullWidth
                 source="current_status"
@@ -129,7 +132,6 @@ export default class CompanyEdit extends Component {
             <Grid item xs={12} md={6}>
               <TextInput source="address" label="dirección" fullWidth />
             </Grid>
-
             <Grid item xs={12} md={6}>
               <ReferenceInput
                 label="Usuario"

@@ -6,7 +6,7 @@ import { createHashHistory } from "history";
 
 import { restClient, authClient } from "ra-data-feathers";
 import Api from "./utils/Api";
-import { UserList, UserCreate } from "./pages/users/";
+import { UserList, UserCreate } from "./pages/users";
 import {
   ProductsCategoriesList,
   ProductsCategoriesCreate,
@@ -17,13 +17,17 @@ import { UnitMeasureList, UnitMeasureCreate } from "./pages/unit-measure";
 import { ShopTypesCreateCreate, ShopTypesCreateList } from "./pages/shop-types";
 import { ShopList, ShopCreate, ShopEdit } from "./pages/shops";
 import { ListProduct, ProductCreate, ProductEdit } from "./pages/products";
-import { orderList, orderShow } from "./pages/orders/";
+import { orderList, orderShow } from "./pages/orders";
 import Layout from "./layouts/Layout";
+import { BannerList, BannerEdit, BannerCreate } from "./pages/banners";
 import {
   ShippingCostList,
   ShippingCreate,
   ShippingCostEdit,
 } from "./pages/shipping-cost";
+import { ScheduleList, ScheduleEdit, ScheduleCreate } from "./pages/schedule";
+import { CmsList, CmsCreate, CmsEdit } from "./pages/cms";
+
 import authProvider from "./authProvider";
 
 const restClientOptions = {
@@ -34,7 +38,7 @@ const authClientOptions = {
   storageKey: "feathers-jwt",
   authenticate: { strategy: "local" },
   permissionsKey: "permissions",
-  permissionsField: "roles",
+  permissionsField: "role",
   redirectTo: "/login",
   passwordField: "password",
   usernameField: "phone",
@@ -91,6 +95,20 @@ const App = () => (
       create={ShippingCreate}
       edit={ShippingCostEdit}
     />
+    <Resource
+      name="banners"
+      // create={UnitMeasureCreate}
+      list={BannerList}
+      edit={BannerEdit}
+      create={BannerCreate}
+    />
+    <Resource
+      name="schedule"
+      list={ScheduleList}
+      edit={ScheduleEdit}
+      create={ScheduleCreate}
+    />
+    <Resource name="cms" list={CmsList} edit={CmsEdit} create={CmsCreate} />
     <Resource name="order-statuses" />
     <Resource name="localities" />
   </Admin>
