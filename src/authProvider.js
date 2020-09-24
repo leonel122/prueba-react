@@ -12,6 +12,7 @@ import { loginJwt, current } from "./utils/Api";
 export default (type, params) => {
   if (type === AUTH_LOGIN) {
     const { username, password } = params;
+
     const request = new Request("https://api.esnaqui.com/authentication", {
       method: "POST",
       body: JSON.stringify({ strategy: "local", phone: username, password }),

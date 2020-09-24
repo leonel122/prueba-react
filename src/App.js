@@ -54,63 +54,74 @@ const App = () => (
     /* i18nProvider={i18nProvider} */
     locale="en"
   >
-    <Resource
-      name="users"
-      create={UserCreate} /*  edit={UserEdit} */
-      list={UserList}
-    />
-    <Resource
-      name="unit-measure"
-      create={UnitMeasureCreate}
-      list={UnitMeasureList} /*  edit={UserEdit} */
-    />
-    <Resource
-      name="categories"
-      list={ProductsCategoriesList}
-      edit={ProductsCategoriesEdit}
-      create={ProductsCategoriesCreate}
-      show={ProductsCategoriesShow}
-    />
-    <Resource
-      name="shops-types"
-      list={ShopTypesCreateList}
-      create={ShopTypesCreateCreate}
-    />
-    <Resource
-      name="shops"
-      list={ShopList}
-      create={ShopCreate}
-      edit={ShopEdit}
-    />
-    <Resource name="orders" list={orderList} show={orderShow} />
-    <Resource
-      name="products"
-      list={ListProduct}
-      create={ProductCreate}
-      edit={ProductEdit}
-    />
-    <Resource
-      name="shipping-cost"
-      list={ShippingCostList}
-      create={ShippingCreate}
-      edit={ShippingCostEdit}
-    />
-    <Resource
-      name="banners"
-      // create={UnitMeasureCreate}
-      list={BannerList}
-      edit={BannerEdit}
-      create={BannerCreate}
-    />
-    <Resource
-      name="schedule"
-      list={ScheduleList}
-      edit={ScheduleEdit}
-      create={ScheduleCreate}
-    />
-    <Resource name="cms" list={CmsList} edit={CmsEdit} create={CmsCreate} />
-    <Resource name="order-statuses" />
-    <Resource name="localities" />
+    {(permissions) => [
+      permissions === "admin"
+        ? [
+            <Resource
+              name="shops-types"
+              list={ShopTypesCreateList}
+              create={ShopTypesCreateCreate}
+            />,
+            <Resource
+              name="banners"
+              // create={UnitMeasureCreate}
+              list={BannerList}
+              edit={BannerEdit}
+              create={BannerCreate}
+            />,
+            <Resource
+              name="unit-measure"
+              create={UnitMeasureCreate}
+              list={UnitMeasureList} /*  edit={UserEdit} */
+            />,
+            <Resource
+              name="cms"
+              list={CmsList}
+              edit={CmsEdit}
+              create={CmsCreate}
+            />,
+          ]
+        : null,
+      <Resource
+        name="users"
+        create={UserCreate} /*  edit={UserEdit} */
+        list={UserList}
+      />,
+      <Resource
+        name="categories"
+        list={ProductsCategoriesList}
+        edit={ProductsCategoriesEdit}
+        create={ProductsCategoriesCreate}
+        show={ProductsCategoriesShow}
+      />,
+      <Resource
+        name="shops"
+        list={ShopList}
+        create={ShopCreate}
+        edit={ShopEdit}
+      />,
+      <Resource name="orders" list={orderList} show={orderShow} />,
+      <Resource
+        name="products"
+        list={ListProduct}
+        create={ProductCreate}
+        edit={ProductEdit}
+      />,
+      <Resource
+        name="shipping-cost"
+        list={ShippingCostList}
+        create={ShippingCreate}
+        edit={ShippingCostEdit}
+      />,
+      <Resource
+        name="schedule"
+        list={ScheduleList}
+        edit={ScheduleEdit}
+        create={ScheduleCreate}
+      />,
+      <Resource name="order-statuses" />,
+      <Resource name="localities" />,
+    ]}
   </Admin>
 );
 export default App;

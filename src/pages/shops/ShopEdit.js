@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Edit,
   SimpleForm,
@@ -46,6 +46,7 @@ export default class CompanyEdit extends Component {
   state = {
     path_image: null,
     expanded: false,
+    role: null,
   };
 
   async fetchData() {
@@ -55,7 +56,9 @@ export default class CompanyEdit extends Component {
       .then((it) => this.setState({ path_image: it.logo }));
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const role = await localStorage.getItem("role");
+    this.setState({ role: role });
     this.fetchData();
   }
 
@@ -67,12 +70,12 @@ export default class CompanyEdit extends Component {
   };
 
   render() {
-    const { path_image } = this.state;
+    const { path_image, role } = this.state;
 
     return (
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
-          <Grid container fullWidth spacing={16}>
+          <Grid container fullWidth spacing={4}>
             <Grid item xs={12} md={6} container>
               <TextInput source="name" label="Razón social" fullWidth />
             </Grid>
@@ -106,9 +109,32 @@ export default class CompanyEdit extends Component {
                 <SelectInput optionText="name" fullWidth />
               </ReferenceInput>
             </Grid>
-            <Grid item xs={12} md={6}>
-              <NumberInput source="priority" label="Prioridad" fullWidth />
-            </Grid>
+            {role == '"admin"' && (
+              <Fragment>
+                <Grid item xs={12} md={6}>
+                  <NumberInput source="priority" label="Prioridad" fullWidth />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <SelectInput
+                    fullWidth
+                    source="status"
+                    label="Estado real"
+                    choices={StatusTypes}
+                    optionText="name"
+                    optionValue="id"
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <ReferenceInput
+                    label="Usuario"
+                    source="user_id"
+                    reference="users"
+                  >
+                    <SelectInput optionText="first_name" fullWidth />
+                  </ReferenceInput>
+                </Grid>
+              </Fragment>
+            )}
             <Grid item xs={12} md={6}>
               <SelectInput
                 fullWidth
@@ -120,26 +146,7 @@ export default class CompanyEdit extends Component {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <SelectInput
-                fullWidth
-                source="status"
-                label="Estado real"
-                choices={StatusTypes}
-                optionText="name"
-                optionValue="id"
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
               <TextInput source="address" label="dirección" fullWidth />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <ReferenceInput
-                label="Usuario"
-                source="user_id"
-                reference="users"
-              >
-                <SelectInput optionText="first_name" fullWidth />
-              </ReferenceInput>
             </Grid>
             <Grid item xs={6}>
               {path_image ? (
@@ -155,6 +162,7 @@ export default class CompanyEdit extends Component {
                 path="categories"
                 handleUploadFinish={this.handleUploadFinish}
                 id={this.props.id}
+                label="Subir logo"
               />
             </Grid>
           </Grid>

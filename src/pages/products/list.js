@@ -42,6 +42,7 @@ const ShopList = (props) => {
         <StatusField source="status" label="Estado" />
         <TextField source="shop.name" label="Tienda" />
         <TextField source="value" label="precio" />
+        <TextField source="quantity" label="Cantidad" />
         <EditButton label="Editar" />
       </Datagrid>
     </List>

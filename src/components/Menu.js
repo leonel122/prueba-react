@@ -26,6 +26,7 @@ export default class Menu extends Component {
     menuCustomers: false,
     menuConfig: false,
     dense: false,
+    role: "user",
   };
 
   static propTypes = {
@@ -37,40 +38,30 @@ export default class Menu extends Component {
     this.setState({ [menu]: !this.state[menu] });
   };
 
+  async componentDidMount() {
+    let role = await localStorage.getItem("permissions");
+    console.log(role);
+    this.setState({ role: role });
+  }
+
   render() {
     const { onMenuClick, logout } = this.props;
+    const { role } = this.state;
+
+    console.log(typeof role);
+    if (role == "admin") {
+      console.log("-------------");
+    }
+    console.log(role[0], "ROLE");
     return (
       <div>
-        <SubMenu
-          handleToggle={() => this.handleToggle("menuConfig")}
-          isOpen={this.state.menuConfig}
-          /* sidebarIsOpen={open} */
-          name="Configuraciones"
-          icon={<Icon type="read" />}
-          dense={this.state.dense}
-        >
-          <MenuItemLink
-            className={"menuItems"}
-            to={`/categories`}
-            primaryText={"Categorias"}
-            onClick={onMenuClick}
-            leftIcon={<CategoryTwoTone type="read" />}
-          />
-          {/* <MenuItemLink
-            className={"menuItems"}
-            to={`/unit-measure`}
-            primaryText={"Unicades de medidas"}
-            onClick={onMenuClick}
-            leftIcon={<CardMembership type="read" />}
-          />
-          <MenuItemLink
-            className={"menuItems"}
-            to={`/shops-types`}
-            primaryText={"Tipos de tiendas"}
-            onClick={onMenuClick}
-            leftIcon={<CardMembership type="read" />}
-          /> */}
-        </SubMenu>
+        <MenuItemLink
+          className={"menuItems"}
+          to={`/orders`}
+          primaryText={"Ordenes"}
+          onClick={onMenuClick}
+          leftIcon={<ReorderIcon />}
+        />
         <MenuItemLink
           className={"menuItems"}
           to={`/shipping-cost`}
@@ -81,37 +72,23 @@ export default class Menu extends Component {
         <MenuItemLink
           className={"menuItems"}
           to={`/users`}
-          primaryText={"Usuarios"}
+          primaryText={role == '"admin"' ? "Usuarios" : "Mi usuario"}
           onClick={onMenuClick}
           leftIcon={<Icon type="user-add" />}
         />
         <MenuItemLink
           className={"menuItems"}
           to={`/shops`}
-          primaryText={"Tiendas"}
+          primaryText={role == '"admin"' ? "Tiendas" : "Mi tienda"}
           onClick={onMenuClick}
           leftIcon={<StorefrontIcon />}
         />
         <MenuItemLink
           className={"menuItems"}
           to={`/products`}
-          primaryText={"Productos"}
+          primaryText={role == '"admin"' ? "Productos" : "Mis Productos"}
           onClick={onMenuClick}
           leftIcon={<GridOnIcon />}
-        />
-        <MenuItemLink
-          className={"menuItems"}
-          to={`/orders`}
-          primaryText={"Ordenes"}
-          onClick={onMenuClick}
-          leftIcon={<ReorderIcon />}
-        />
-        <MenuItemLink
-          className={"menuItems"}
-          to={`/banners`}
-          primaryText={"Banners"}
-          onClick={onMenuClick}
-          leftIcon={<ImageIcon />}
         />
         <MenuItemLink
           className={"menuItems"}
@@ -120,13 +97,41 @@ export default class Menu extends Component {
           onClick={onMenuClick}
           leftIcon={<ScheduleIcon />}
         />
-        <MenuItemLink
-          className={"menuItems"}
-          to={`/cms`}
-          primaryText={"cms"}
-          onClick={onMenuClick}
-          leftIcon={<ScheduleIcon />}
-        />
+        {role == '"admin"'
+          ? [
+              <MenuItemLink
+                className={"menuItems"}
+                to={`/banners`}
+                primaryText={"Banners"}
+                onClick={onMenuClick}
+                leftIcon={<ImageIcon />}
+              />,
+              <MenuItemLink
+                className={"menuItems"}
+                to={`/cms`}
+                primaryText={"cms"}
+                onClick={onMenuClick}
+                leftIcon={<ScheduleIcon />}
+              />,
+              <SubMenu
+                handleToggle={() => this.handleToggle("menuConfig")}
+                isOpen={this.state.menuConfig}
+                /* sidebarIsOpen={open} */
+                name="Configuraciones"
+                icon={<Icon type="read" />}
+                dense={this.state.dense}
+              >
+                ,
+                <MenuItemLink
+                  className={"menuItems"}
+                  to={`/categories`}
+                  primaryText={"Categorias"}
+                  onClick={onMenuClick}
+                  leftIcon={<CategoryTwoTone type="read" />}
+                />
+              </SubMenu>,
+            ]
+          : null}
         <Responsive
           small={logout}
           medium={null} // Pass null to render nothing on larger devices

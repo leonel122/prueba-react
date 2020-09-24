@@ -56,10 +56,10 @@ export default class CompanyEdit extends Component {
             </Grid>
             <Grid item xs={12} md={6}>
               <TextInput
-                multiline
+                type="number"
                 fullWidth
-                source="description"
-                label="Descripcion"
+                source="quantity"
+                label="Cantidad"
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -73,8 +73,16 @@ export default class CompanyEdit extends Component {
                 ]}
               />
             </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                multiline
+                fullWidth
+                source="description"
+                label="Descripcion"
+              />
+            </Grid>
             <Grid item xs={12} style={{ textAlign: "center" }}>
-              <div>
+              <div style={{ textAlign: "initial" }}>
                 {path_image ? (
                   <img
                     src={`${URL_S3}${path_image}`}
@@ -85,7 +93,9 @@ export default class CompanyEdit extends Component {
                   />
                 ) : null}
               </div>
-              <div style={{ marginTop: 10 }}>
+              <div
+                style={{ marginTop: 10, textAlign: "initial", width: "300px" }}
+              >
                 <S3File
                   idComponent="category-image"
                   path="categories"

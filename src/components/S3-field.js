@@ -71,7 +71,7 @@ class S3Field extends Component {
           variant="outlined"
           color="primary"
         >
-          {file.name ? "Actualizar imagen" : "Subir imagen"}
+          {label ? label : "Subir imagen"}
         </label>
         <label className="s3Button">
           <S3Uploader
