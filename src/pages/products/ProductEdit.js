@@ -37,7 +37,7 @@ export default class CompanyEdit extends Component {
       .then((it) => this.fetchData());
   };
 
-  render() {
+  render(permissions) {
     const { path_image } = this.state;
     return (
       <Edit title={<Title />} {...this.props}>
@@ -46,11 +46,17 @@ export default class CompanyEdit extends Component {
             <Grid item xs={12} md={6} spacing={6}>
               <TextInput fullWidth source="name" label="Nombre" />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <ReferenceInput label="Tienda" source="shop_id" reference="shops">
-                <SelectInput optionText="name" fullWidth />
-              </ReferenceInput>
-            </Grid>
+            {permissions === "admin" && (
+              <Grid item xs={12} md={6}>
+                <ReferenceInput
+                  label="Tienda"
+                  source="shop_id"
+                  reference="shops"
+                >
+                  <SelectInput optionText="name" fullWidth />
+                </ReferenceInput>
+              </Grid>
+            )}
             <Grid item xs={12} md={6}>
               <NumberInput fullWidth source="value" label="Precio" />
             </Grid>

@@ -8,6 +8,7 @@ import {
   Filter,
   TextInput,
   SelectInput,
+  ReferenceField,
 } from "react-admin";
 
 const CurrentStatusField = ({ source, record = {} }) => {
@@ -50,7 +51,7 @@ const Filters = (props) => (
   </Filter>
 );
 
-const ShopList = (props) => {
+const ShopList = ({ permissions, ...props }) => {
   return (
     <List {...props} filters={<Filters />} exporter={false}>
       <Datagrid>
@@ -59,8 +60,16 @@ const ShopList = (props) => {
         <TextField source="nit" label="Nit" />
         <CurrentStatusField />
         <TextField source="status" label="Estado" />
-        <TextField source="phone" label="Telefono" />
-        <TextField source="category.name" label="Categoria" />
+        {permissions === "admin" && (
+          <TextField source="phone" label="Telefono" />
+        )}
+        {permissions === "admin" && (
+          <TextField source="category.name" label="Categoria" />
+        )}
+        {permissions === "admin" && (
+          <TextField source="user_id" label="Usuario" />
+        )}
+
         <EditButton label="Editar" />
       </Datagrid>
     </List>

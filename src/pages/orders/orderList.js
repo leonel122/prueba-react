@@ -49,17 +49,18 @@ const StatusField = ({ source, record = {} }) => {
   } `;
 };
 
-const orderList = (props) => {
+const orderList = ({ permissions, ...props }) => {
   return (
     <List
       {...props}
       filters={<Filters />}
-      sort={{ field: "id", order: "DESC" }}
+      sort={{ field: "createdAt", order: "DESC" }}
     >
       <Datagrid>
         <TextField source="id" label="id" />
-        <TextField source="shop_id" label="id" />
-        <TextField source="shop.name" label="Tienda" />
+        {permissions === "admin" && (
+          <TextField source="shop.name" label="Tienda" />
+        )}
         <UserNameField label="Cliente" />
         <TextField source="user.phone" label="Telefono" />
         <StatusField label="Estado" />

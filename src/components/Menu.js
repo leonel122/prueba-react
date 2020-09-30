@@ -48,7 +48,7 @@ export default class Menu extends Component {
     const { onMenuClick, logout } = this.props;
     const { role } = this.state;
 
-    console.log(typeof role);
+    console.log(role);
     if (role == "admin") {
       console.log("-------------");
     }

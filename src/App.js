@@ -34,6 +34,11 @@ const restClientOptions = {
   usePatch: true,
 };
 
+const initialState = {
+  theme: "dark",
+  grid: 5,
+};
+
 const authClientOptions = {
   storageKey: "feathers-jwt",
   authenticate: { strategy: "local" },
@@ -84,20 +89,22 @@ const App = () => (
         : null,
       <Resource
         name="users"
-        create={UserCreate} /*  edit={UserEdit} */
+        create={
+          permissions == "admin" ? UserCreate : false
+        } /*  edit={UserEdit} */
         list={UserList}
       />,
       <Resource
         name="categories"
         list={ProductsCategoriesList}
         edit={ProductsCategoriesEdit}
-        create={ProductsCategoriesCreate}
+        create={permissions == "admin" ? ProductsCategoriesCreate : false}
         show={ProductsCategoriesShow}
       />,
       <Resource
         name="shops"
         list={ShopList}
-        create={ShopCreate}
+        create={permissions == "admin" ? ShopCreate : false}
         edit={ShopEdit}
       />,
       <Resource name="orders" list={orderList} show={orderShow} />,

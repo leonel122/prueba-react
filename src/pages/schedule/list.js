@@ -55,12 +55,14 @@ const Filters = (props) => (
   </Filter>
 );
 
-const ScheduleList = (props) => {
+const ScheduleList = ({ permissions, ...props }) => {
   return (
     <List {...props} filters={<Filters />} exporter={false}>
       <Datagrid>
         <TextField source="id" label="id" />
-        <TextField source="shop.name" label="Tienda" />
+        {permissions === "admin" && (
+          <TextField source="shop.name" label="Tienda" />
+        )}
         <TextField source="start_hour" label="Hora de Apertura" />
         <TextField source="end_hour" label="Hora de Cierre" />
         <DayField label="Estado" />

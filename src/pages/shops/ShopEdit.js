@@ -60,6 +60,8 @@ export default class CompanyEdit extends Component {
     const role = await localStorage.getItem("role");
     this.setState({ role: role });
     this.fetchData();
+
+    console.log(role, "oooooooooooooo");
   }
 
   handleUploadFinish = async (url, id) => {
@@ -69,7 +71,7 @@ export default class CompanyEdit extends Component {
       .then((it) => this.fetchData());
   };
 
-  render() {
+  render(permissions) {
     const { path_image, role } = this.state;
 
     return (
@@ -100,6 +102,17 @@ export default class CompanyEdit extends Component {
               />
             </Grid>
             <Grid item xs={12} md={6}>
+              <TextInput source="whatsapp" label="whatsapp" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                source="quantity_time_preparation"
+                label="Tiempo de aceptación de pedidos"
+                fullWidth
+                type="number"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
               <ReferenceInput
                 label="Categoria"
                 source="category_id"
@@ -109,32 +122,38 @@ export default class CompanyEdit extends Component {
                 <SelectInput optionText="name" fullWidth />
               </ReferenceInput>
             </Grid>
-            {role == '"admin"' && (
-              <Fragment>
-                <Grid item xs={12} md={6}>
-                  <NumberInput source="priority" label="Prioridad" fullWidth />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <SelectInput
-                    fullWidth
-                    source="status"
-                    label="Estado real"
-                    choices={StatusTypes}
-                    optionText="name"
-                    optionValue="id"
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <ReferenceInput
-                    label="Usuario"
-                    source="user_id"
-                    reference="users"
-                  >
-                    <SelectInput optionText="first_name" fullWidth />
-                  </ReferenceInput>
-                </Grid>
-              </Fragment>
+            {/* {role == '"admin"' && ( */}
+            {/* <Fragment> */}
+            {permissions === "admin" && (
+              <Grid item xs={12} md={6}>
+                <NumberInput source="priority" label="Prioridad" fullWidth />
+              </Grid>
             )}
+            {permissions === "admin" && (
+              <Grid item xs={12} md={6}>
+                <SelectInput
+                  fullWidth
+                  source="status"
+                  label="Estado real"
+                  choices={StatusTypes}
+                  optionText="name"
+                  optionValue="id"
+                />
+              </Grid>
+            )}
+            {permissions === "admin" && (
+              <Grid item xs={12} md={6}>
+                <ReferenceInput
+                  label="Usuario"
+                  source="user_id"
+                  reference="users"
+                >
+                  <SelectInput optionText="first_name" fullWidth />
+                </ReferenceInput>
+              </Grid>
+            )}
+            {/* </Fragment> */}
+            {/* )} */}
             <Grid item xs={12} md={6}>
               <SelectInput
                 fullWidth

@@ -33,14 +33,16 @@ const StatusField = ({ source, record = {} }) => {
   return `${record.status == "active" ? "Activo" : "Inactivo"} `;
 };
 
-const ShopList = (props) => {
+const ShopList = ({ permissions, ...props }) => {
   return (
     <List {...props} filters={<Filters />} exporter={true}>
       <Datagrid>
         <TextField source="id" label="id" />
         <TextField source="name" label="Nombre" />
         <StatusField source="status" label="Estado" />
-        <TextField source="shop.name" label="Tienda" />
+        {permissions === "admin" && (
+          <TextField source="shop.name" label="Tienda" />
+        )}
         <TextField source="value" label="precio" />
         <TextField source="quantity" label="Cantidad" />
         <EditButton label="Editar" />
