@@ -74,8 +74,8 @@ export default class CompanyEdit extends Component {
                 source="status"
                 label="Estado"
                 choices={[
-                  { id: "active", name: "Activa" },
-                  { id: "inactive", name: "Inactiva" },
+                  { id: "active", name: "Activo" },
+                  { id: "inactive", name: "Inactivo" },
                 ]}
               />
             </Grid>

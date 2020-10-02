@@ -59,7 +59,7 @@ const ScheduleList = ({ permissions, ...props }) => {
   return (
     <List {...props} filters={<Filters />} exporter={false}>
       <Datagrid>
-        <TextField source="id" label="id" />
+        {permissions === "admin" && <TextField source="id" label="id" />}
         {permissions === "admin" && (
           <TextField source="shop.name" label="Tienda" />
         )}

@@ -8,11 +8,24 @@ import {
   TextInput,
   SelectInput,
 } from "react-admin";
-
+import { Title } from "./";
 const Status = [
   { id: "active", name: "Activo" },
   { id: "inactive", name: "Inactivo" },
 ];
+
+const StatusField = ({ source, record = {}, ...props }) => {
+  return (
+    <p
+      style={{
+        color: record.status == "active" ? "green" : "#FF9C33",
+        fontWeight: "bold",
+      }}
+    >
+      {record.status == "active" ? "activo" : "Inactivo"}
+    </p>
+  );
+};
 
 const Filters = (props) => (
   <Filter {...props}>
@@ -29,13 +42,9 @@ const Filters = (props) => (
   </Filter>
 );
 
-const StatusField = ({ source, record = {} }) => {
-  return `${record.status == "active" ? "Activo" : "Inactivo"} `;
-};
-
 const ShopList = ({ permissions, ...props }) => {
   return (
-    <List {...props} filters={<Filters />} exporter={true}>
+    <List {...props} filters={<Filters />} exporter={true} title={<Title />}>
       <Datagrid>
         <TextField source="id" label="id" />
         <TextField source="name" label="Nombre" />

@@ -10,12 +10,19 @@ import {
   ReferenceInput,
   DeleteButton,
 } from "react-admin";
-
-const Filters = (props) => (
+import { Title } from "./";
+const Filters = ({ permissions, ...props }) => (
   <Filter {...props}>
-    <ReferenceInput label="Tienda" source="shop_id" reference="shops" alwaysOn>
-      <SelectInput fullWidth source="shop_id" label="Tienda" alwaysOn />
-    </ReferenceInput>
+    {permissions == "admin" && (
+      <ReferenceInput
+        label="Tienda"
+        source="shop_id"
+        reference="shops"
+        alwaysOn
+      >
+        <SelectInput fullWidth source="shop_id" label="Tienda" alwaysOn />
+      </ReferenceInput>
+    )}
     <ReferenceInput
       label="Localidad"
       source="locality_id"
@@ -27,12 +34,14 @@ const Filters = (props) => (
   </Filter>
 );
 
-const ShopList = (props) => {
+const ShopList = ({ permissions, ...props }) => {
   return (
-    <List {...props} filters={<Filters />} exporter={false}>
+    <List {...props} filters={<Filters />} exporter={false} title={<Title />}>
       <Datagrid>
-        <TextField source="id" label="id" />
-        <TextField source="shop.name" label="Tienda" />
+        {permissions == "admin" && <TextField source="id" label="id" />}
+        {permissions == "admin" && (
+          <TextField source="shop.name" label="Tienda" />
+        )}
         <TextField source="locality.name" label="Localidad" />
         <TextField source="price" label="Precio" />
         <EditButton label="Editar" />

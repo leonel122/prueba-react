@@ -54,7 +54,7 @@ const Filters = (props) => (
   </Filter>
 );
 
-const UserList = (props) => {
+const UserList = ({ permissions, ...props }) => {
   const [isMatch, setIsMatch] = useState(false);
   const classes = useStyles();
   const history = useHistory();
@@ -80,12 +80,14 @@ const UserList = (props) => {
                 filters={<Filters />}
               >
                 <Datagrid rowClick="edit" optimized {...props}>
-                  <TextField source="id" disable />
+                  {permissions == "admin" && <TextField source="id" disable />}
                   <TextField label="Nombre" source="first_name" />
                   <TextField label="Apellido" source="last_name" />
                   <TextField label="Telefono" source="phone" />
                   <EmailField source="email" />
-                  <TextField source="status" label="Estado" />
+                  {permissions == "admin" && (
+                    <TextField source="status" label="Estado" />
+                  )}
                   <EditButton label="Editar" />
                   {/* <Button
                     variant="contained"

@@ -64,17 +64,10 @@ export default class Menu extends Component {
         />
         <MenuItemLink
           className={"menuItems"}
-          to={`/shipping-cost`}
-          primaryText={"Costo de envio"}
+          to={`/products`}
+          primaryText={role == '"admin"' ? "Productos" : "Mis Productos"}
           onClick={onMenuClick}
-          leftIcon={<LocalShippingIcon />}
-        />
-        <MenuItemLink
-          className={"menuItems"}
-          to={`/users`}
-          primaryText={role == '"admin"' ? "Usuarios" : "Mi usuario"}
-          onClick={onMenuClick}
-          leftIcon={<Icon type="user-add" />}
+          leftIcon={<GridOnIcon />}
         />
         <MenuItemLink
           className={"menuItems"}
@@ -85,15 +78,22 @@ export default class Menu extends Component {
         />
         <MenuItemLink
           className={"menuItems"}
-          to={`/products`}
-          primaryText={role == '"admin"' ? "Productos" : "Mis Productos"}
+          to={`/users`}
+          primaryText={role == '"admin"' ? "Usuarios" : "Mi usuario"}
           onClick={onMenuClick}
-          leftIcon={<GridOnIcon />}
+          leftIcon={<Icon type="user-add" />}
+        />
+        <MenuItemLink
+          className={"menuItems"}
+          to={`/shipping-cost`}
+          primaryText={"Costo de envio"}
+          onClick={onMenuClick}
+          leftIcon={<LocalShippingIcon />}
         />
         <MenuItemLink
           className={"menuItems"}
           to={`/schedule`}
-          primaryText={"Horario"}
+          primaryText={"Horario de atención"}
           onClick={onMenuClick}
           leftIcon={<ScheduleIcon />}
         />

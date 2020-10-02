@@ -4,8 +4,6 @@ import UserEdit from "./UserEdit";
 import UserCreate from "./UserCreate";
 
 const Title = ({ record }) => {
-  return (
-    <span>{record ? `Editar ${record.name}` : "Listardo de usuarios"}</span>
-  );
+  return <span>{record ? `Editar ${record.name}` : "Mi usuario"}</span>;
 };
 export { UserList, UserEdit, Title, UserCreate };

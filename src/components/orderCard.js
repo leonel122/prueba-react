@@ -91,27 +91,31 @@ export default function MediaCard({ ...props }) {
               style={{
                 color: props.order
                   ? props.order.order.order_status_id == 1
-                    ? "red"
-                    : props.order.order.order_status_id == 2
                     ? "green"
+                    : props.order.order.order_status_id == 2
+                    ? "#FF9C33"
                     : props.order.order.order_status_id == 3
                     ? "green"
                     : props.order.order.order_status_id == 4
                     ? "red"
-                    : "green"
+                    : props.order.order.order_status_id == 5
+                    ? "green"
+                    : "red"
                   : "gray",
               }}
             >
               {props.order
                 ? props.order.order.order_status_id == 1
-                  ? "Pendiente por aprobar"
+                  ? "Pendiente por aceptar"
                   : props.order.order.order_status_id == 2
-                  ? "Aceptada"
+                  ? "Preparando productos"
                   : props.order.order.order_status_id == 3
                   ? "Enviada"
                   : props.order.order.order_status_id == 4
                   ? "Rechazada"
-                  : "Entregada"
+                  : props.order.order.order_status_id == 5
+                  ? "Entregada"
+                  : "Cancelada"
                 : "No encontrado"}
             </Typography>
           </div>

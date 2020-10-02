@@ -10,7 +10,7 @@ import {
   SelectInput,
   ReferenceField,
 } from "react-admin";
-
+import { Title } from "./";
 const CurrentStatusField = ({ source, record = {} }) => {
   return `${record.current_status == "open" ? "Abierta" : "Cerrada"} `;
 };
@@ -53,7 +53,7 @@ const Filters = (props) => (
 
 const ShopList = ({ permissions, ...props }) => {
   return (
-    <List {...props} filters={<Filters />} exporter={false}>
+    <List {...props} filters={<Filters />} exporter={false} title={<Title />}>
       <Datagrid>
         <TextField source="id" label="id" />
         <TextField source="name" label="Nombre" />

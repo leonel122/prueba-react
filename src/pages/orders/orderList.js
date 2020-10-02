@@ -9,13 +9,14 @@ import {
   TextInput,
   DateField,
 } from "react-admin";
+import { Title } from "./";
 
 const Status = [
-  { id: 1, name: "Pendiente" },
-  { id: 2, name: "Aceptado" },
-  { id: 3, name: "Enviado" },
-  { id: 4, name: "Rechazado" },
-  { id: 5, name: "Entregado" },
+  { id: 1, name: "Pendiente por aceptar" },
+  { id: 2, name: "Preparando productos" },
+  { id: 3, name: "Enviada" },
+  { id: 4, name: "Rechazada" },
+  { id: 5, name: "Entregada" },
 ];
 
 const Filters = (props) => (
@@ -37,16 +38,38 @@ const UserNameField = ({ source, record = {} }) => {
   return `${record.user.first_name} ${record.user.last_name} `;
 };
 
-const StatusField = ({ source, record = {} }) => {
-  return `${
-    record.order_status_id == 1
-      ? "Pendiente"
-      : record.order_status_id == 2
-      ? "Aceptado"
-      : record.order_status_id == 3
-      ? "Enviado"
-      : "Rechazado"
-  } `;
+const StatusField = ({ source, record = {}, ...props }) => {
+  return (
+    <p
+      style={{
+        color:
+          record.order_status_id == 1
+            ? "green"
+            : record.order_status_id == 2
+            ? "#FF9C33"
+            : record.order_status_id == 3
+            ? "green"
+            : record.order_status_id == 4
+            ? "red"
+            : record.order_status_id == 5
+            ? "green"
+            : "red",
+        fontWeight: "bold",
+      }}
+    >
+      {record.order_status_id == 1
+        ? "Pendiente por aceptar"
+        : record.order_status_id == 2
+        ? "Preparando productos"
+        : record.order_status_id == 3
+        ? "Enviada"
+        : record.order_status_id == 4
+        ? "Rechazada"
+        : record.order_status_id == 5
+        ? "Entregada"
+        : "Cancelada"}
+    </p>
+  );
 };
 
 const orderList = ({ permissions, ...props }) => {
@@ -55,6 +78,7 @@ const orderList = ({ permissions, ...props }) => {
       {...props}
       filters={<Filters />}
       sort={{ field: "createdAt", order: "DESC" }}
+      title={<Title />}
     >
       <Datagrid>
         <TextField source="id" label="id" />
