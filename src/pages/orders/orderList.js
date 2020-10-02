@@ -10,6 +10,7 @@ import {
   DateField,
 } from "react-admin";
 import { Title } from "./";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const Status = [
   { id: 1, name: "Pendiente por aceptar" },
@@ -86,11 +87,11 @@ const orderList = ({ permissions, ...props }) => {
           <TextField source="shop.name" label="Tienda" />
         )}
         <UserNameField label="Cliente" />
-        <TextField source="user.phone" label="Telefono" />
+        <TextField source="user.phone" label="Teléfono" />
         <StatusField label="Estado" />
-        <DateField source="createdAt" label="fecha" />
-        <TextField source="value" />
-        <TextField source="shipping_cost" label="costo de envio" />
+        <DateField source="createdAt" label="Fecha" />
+        <TextField source="value" label="Valor" />
+        <TextField source="shipping_cost" label="Costo de envío" />
         <ShowButton label="Ver" />
       </Datagrid>
     </List>

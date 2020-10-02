@@ -50,3 +50,7 @@ code {
 .custom-img-field {
   max-height: 10rem;
 }
+
+header[class*="appBar"] {
+  background-color: rgb(240, 54, 19);
+}

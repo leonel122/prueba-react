@@ -83,7 +83,7 @@ const UserList = ({ permissions, ...props }) => {
                   {permissions == "admin" && <TextField source="id" disable />}
                   <TextField label="Nombre" source="first_name" />
                   <TextField label="Apellido" source="last_name" />
-                  <TextField label="Telefono" source="phone" />
+                  <TextField label="Teléfono" source="phone" />
                   <EmailField source="email" />
                   {permissions == "admin" && (
                     <TextField source="status" label="Estado" />

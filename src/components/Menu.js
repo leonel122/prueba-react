@@ -15,7 +15,7 @@ import { Icon } from "antd";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import GridOnIcon from "@material-ui/icons/GridOn";
-import ReorderIcon from "@material-ui/icons/Reorder";
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import ImageIcon from "@material-ui/icons/Image";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 
@@ -56,80 +56,84 @@ export default class Menu extends Component {
     return (
       <div>
         <MenuItemLink
-          className={"menuItems"}
+          style={{ fontWeight: "bold", color: "black" }}
           to={`/orders`}
           primaryText={"Ordenes"}
           onClick={onMenuClick}
-          leftIcon={<ReorderIcon />}
+          leftIcon={
+            <MonetizationOnIcon style={{ color: "rgb(240, 54, 19)" }} />
+          }
         />
         <MenuItemLink
-          className={"menuItems"}
+          style={{ fontWeight: "bold", color: "black" }}
           to={`/products`}
           primaryText={role == '"admin"' ? "Productos" : "Mis Productos"}
           onClick={onMenuClick}
-          leftIcon={<GridOnIcon />}
+          leftIcon={<GridOnIcon style={{ color: "rgb(240, 54, 19)" }} />}
         />
         <MenuItemLink
-          className={"menuItems"}
+          style={{ fontWeight: "bold", color: "black" }}
           to={`/shops`}
           primaryText={role == '"admin"' ? "Tiendas" : "Mi tienda"}
           onClick={onMenuClick}
-          leftIcon={<StorefrontIcon />}
+          leftIcon={<StorefrontIcon style={{ color: "rgb(240, 54, 19)" }} />}
         />
         <MenuItemLink
-          className={"menuItems"}
+          style={{ fontWeight: "bold", color: "black" }}
           to={`/users`}
           primaryText={role == '"admin"' ? "Usuarios" : "Mi usuario"}
           onClick={onMenuClick}
-          leftIcon={<Icon type="user-add" />}
+          leftIcon={
+            <Icon type="user-add" style={{ color: "rgb(240, 54, 19)" }} />
+          }
         />
         <MenuItemLink
-          className={"menuItems"}
+          style={{ fontWeight: "bold", color: "black" }}
           to={`/shipping-cost`}
           primaryText={"Costo de envio"}
           onClick={onMenuClick}
-          leftIcon={<LocalShippingIcon />}
+          leftIcon={<LocalShippingIcon style={{ color: "rgb(240, 54, 19)" }} />}
         />
         <MenuItemLink
-          className={"menuItems"}
+          style={{ fontWeight: "bold", color: "black" }}
           to={`/schedule`}
           primaryText={"Horario de atención"}
           onClick={onMenuClick}
-          leftIcon={<ScheduleIcon />}
+          leftIcon={<ScheduleIcon style={{ color: "rgb(240, 54, 19)" }} />}
         />
         {role == '"admin"'
           ? [
               <MenuItemLink
-                className={"menuItems"}
+                style={{ fontWeight: "bold", color: "black" }}
                 to={`/banners`}
                 primaryText={"Banners"}
                 onClick={onMenuClick}
                 leftIcon={<ImageIcon />}
               />,
               <MenuItemLink
-                className={"menuItems"}
+                style={{ fontWeight: "bold", color: "black" }}
                 to={`/cms`}
                 primaryText={"cms"}
                 onClick={onMenuClick}
                 leftIcon={<ScheduleIcon />}
               />,
-              <SubMenu
-                handleToggle={() => this.handleToggle("menuConfig")}
-                isOpen={this.state.menuConfig}
-                /* sidebarIsOpen={open} */
-                name="Configuraciones"
-                icon={<Icon type="read" />}
-                dense={this.state.dense}
-              >
-                ,
-                <MenuItemLink
-                  className={"menuItems"}
-                  to={`/categories`}
-                  primaryText={"Categorias"}
-                  onClick={onMenuClick}
-                  leftIcon={<CategoryTwoTone type="read" />}
-                />
-              </SubMenu>,
+              ,
+              // <SubMenu
+              //   handleToggle={() => this.handleToggle("menuConfig")}
+              //   isOpen={this.state.menuConfig}
+              //   /* sidebarIsOpen={open} */
+              //   name="Configuraciones"
+              //   icon={<Icon type="read" />}
+              //   dense={this.state.dense}
+              // >
+              <MenuItemLink
+                style={{ fontWeight: "bold", color: "black" }}
+                to={`/categories`}
+                primaryText={"Categorias"}
+                onClick={onMenuClick}
+                leftIcon={<CategoryTwoTone type="read" />}
+              />,
+              // </SubMenu>,
             ]
           : null}
         <Responsive

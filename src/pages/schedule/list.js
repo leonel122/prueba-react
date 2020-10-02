@@ -10,7 +10,7 @@ import {
   SelectInput,
   ReferenceField,
 } from "react-admin";
-
+import { Title } from "./";
 const DayField = ({ source, record = {} }) => {
   return `${
     record.day == "0"
@@ -57,15 +57,15 @@ const Filters = (props) => (
 
 const ScheduleList = ({ permissions, ...props }) => {
   return (
-    <List {...props} filters={<Filters />} exporter={false}>
+    <List {...props} filters={<Filters />} exporter={false} title={<Title />}>
       <Datagrid>
         {permissions === "admin" && <TextField source="id" label="id" />}
         {permissions === "admin" && (
           <TextField source="shop.name" label="Tienda" />
         )}
-        <TextField source="start_hour" label="Hora de Apertura" />
-        <TextField source="end_hour" label="Hora de Cierre" />
-        <DayField label="Estado" />
+        <DayField label="Dia" />
+        <TextField source="start_hour" label="Abro a las" />
+        <TextField source="end_hour" label="Cierro a las" />
         <EditButton label="Editar" />
       </Datagrid>
     </List>
