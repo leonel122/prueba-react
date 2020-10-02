@@ -63,7 +63,7 @@ class S3Field extends Component {
     if (file.name) return <div className="s3Button mr-2">{file.name}</div>;
     return (
       <div className="mr-2">
-        {label && <label>{label}</label>}
+        {/* {label && <label>{label}</label>} */}
         {<ImageField source={source} value={image} {...this.props} />}
         <label
           htmlFor={this.props.idComponent}

@@ -8,6 +8,7 @@ import {
   NumberInput,
   SimpleShowLayout,
   CheckboxGroupInput,
+  AutoCompleteInput,
 } from "react-admin";
 import Grid from "@material-ui/core/Grid";
 import S3File from "../../components/S3-field";
@@ -57,7 +58,8 @@ export default class CompanyEdit extends Component {
   }
 
   async componentDidMount() {
-    const role = await localStorage.getItem("role");
+    const role = await localStorage.getItem("permissions");
+    console.log(role, "rolellllllll");
     this.setState({ role: role });
     this.fetchData();
 
@@ -71,18 +73,35 @@ export default class CompanyEdit extends Component {
       .then((it) => this.fetchData());
   };
 
-  render(permissions) {
+  render() {
     const { path_image, role } = this.state;
 
     return (
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
           <Grid container fullWidth spacing={4}>
+            <Grid item xs={6}>
+              {path_image ? (
+                <img
+                  src={`${URL_S3}${path_image}`}
+                  width="200px"
+                  height="200px"
+                  className="custom-img-field"
+                />
+              ) : null}
+              <S3File
+                idComponent="category-image"
+                path="categories"
+                handleUploadFinish={this.handleUploadFinish}
+                id={this.props.id}
+                label="Subir logo"
+              />
+            </Grid>
             <Grid item xs={12} md={6} container>
-              <TextInput source="name" label="Razón social" fullWidth />
+              <TextInput source="name" label="Nombre" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextInput source="nit" label="Nit" fullWidth />
+              <TextInput source="nit" label="Nit o rut" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextInput source="phone" label="Telefono" fullWidth />
@@ -124,12 +143,12 @@ export default class CompanyEdit extends Component {
             </Grid>
             {/* {role == '"admin"' && ( */}
             {/* <Fragment> */}
-            {permissions === "admin" && (
+            {role === '"admin"' && (
               <Grid item xs={12} md={6}>
                 <NumberInput source="priority" label="Prioridad" fullWidth />
               </Grid>
             )}
-            {permissions === "admin" && (
+            {role == '"admin"' && (
               <Grid item xs={12} md={6}>
                 <SelectInput
                   fullWidth
@@ -141,12 +160,14 @@ export default class CompanyEdit extends Component {
                 />
               </Grid>
             )}
-            {permissions === "admin" && (
+            {role == '"admin"' && (
               <Grid item xs={12} md={6}>
                 <ReferenceInput
                   label="Usuario"
                   source="user_id"
                   reference="users"
+                  perPage={100}
+                  sort={{ field: "createdAt", order: "ASC" }}
                 >
                   <SelectInput optionText="first_name" fullWidth />
                 </ReferenceInput>
@@ -166,23 +187,6 @@ export default class CompanyEdit extends Component {
             </Grid>
             <Grid item xs={12} md={6}>
               <TextInput source="address" label="dirección" fullWidth />
-            </Grid>
-            <Grid item xs={6}>
-              {path_image ? (
-                <img
-                  src={`${URL_S3}${path_image}`}
-                  width="200px"
-                  height="200px"
-                  className="custom-img-field"
-                />
-              ) : null}
-              <S3File
-                idComponent="category-image"
-                path="categories"
-                handleUploadFinish={this.handleUploadFinish}
-                id={this.props.id}
-                label="Subir logo"
-              />
             </Grid>
           </Grid>
         </SimpleForm>
