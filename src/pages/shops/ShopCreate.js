@@ -9,13 +9,16 @@ import {
 } from "react-admin";
 import { Grid } from "@material-ui/core";
 
-const YearExperienceList = [
-  { id: "1-3", name: "1-3" },
-  { id: "4-6", name: "4-6" },
-  { id: "7-11", name: "7-11" },
-  { id: "12-16", name: "12-16" },
-  { id: "17-25", name: "17-25" },
-  { id: "17-25", name: "17-25" },
+const document_type = [
+  { id: "CC", name: "CC" },
+  { id: "CE", name: "CE" },
+  { id: "PPN", name: "PPN" },
+  { id: "NIT", name: "NIT" },
+];
+
+const PersonsTypes = [
+  { id: "legal", name: "legal" },
+  { id: "natural", name: "natural" },
 ];
 
 const StatusTypes = [
@@ -36,13 +39,36 @@ export default class ShopCreate extends Component {
         <SimpleForm>
           <Grid container fullWidth spacing={16}>
             <Grid item xs={12} md={6} container>
-              <TextInput source="name" label="Razón social" fullWidth />
+              <TextInput source="full_name" label="Nombre completo" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6} container>
+              <SelectInput
+                fullWidth
+                source="person_type"
+                label="Tipo de persona"
+                choices={PersonsTypes}
+                optionText="name"
+                optionValue="id"
+              />
+            </Grid>
+            <Grid item xs={12} md={6} container>
+              <SelectInput
+                fullWidth
+                source="document_type"
+                label="Tipo de documento"
+                choices={document_type}
+                optionText="name"
+                optionValue="id"
+              />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextInput source="nit" label="Nit" fullWidth />
+              <TextInput source="nit" label="Nit / Rut" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextInput source="phone" label="Telefono" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6} container>
+              <TextInput source="name" label="Nombre de la tienda" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextInput

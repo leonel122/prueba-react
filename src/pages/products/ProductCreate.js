@@ -37,6 +37,14 @@ export default class ProductCreate extends Component {
                 type="number"
               />
             </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                type="number"
+                fullWidth
+                source="quantity"
+                label="Cantidad"
+              />
+            </Grid>
             <Grid item xs={12} md={10}>
               <TextInput
                 multiline
