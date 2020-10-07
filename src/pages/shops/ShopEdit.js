@@ -137,17 +137,19 @@ export default class CompanyEdit extends Component {
                 fullWidth
               />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <ReferenceInput
-                perPage={1000}
-                label="Categoria"
-                source="category_id"
-                reference="categories"
-                // filter={{ id: { $gt: 1 } }}
-              >
-                <SelectInput optionText="name" fullWidth />
-              </ReferenceInput>
-            </Grid>
+            {role == '"admin"' && (
+              <Grid item xs={12} md={6}>
+                <ReferenceInput
+                  perPage={1000}
+                  label="Categoria"
+                  source="category_id"
+                  reference="categories"
+                  // filter={{ id: { $gt: 1 } }}
+                >
+                  <SelectInput optionText="name" fullWidth />
+                </ReferenceInput>
+              </Grid>
+            )}
             <Grid item xs={12} md={6}>
               <SelectInput
                 fullWidth
@@ -158,30 +160,33 @@ export default class CompanyEdit extends Component {
                 optionValue="id"
               />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <SelectInput
-                fullWidth
-                source="status"
-                label="Estado"
-                choices={StatusTypes}
-                optionText="name"
-                optionValue="id"
-              />
-            </Grid>
+            {role == '"admin"' && (
+              <Grid item xs={12} md={6}>
+                <SelectInput
+                  fullWidth
+                  source="status"
+                  label="Estado"
+                  choices={StatusTypes}
+                  optionText="name"
+                  optionValue="id"
+                />
+              </Grid>
+            )}
             <Grid item xs={12} md={6}>
               <TextInput source="address" label="dirección" fullWidth />
             </Grid>
-
-            <Grid item xs={12} md={6}>
-              <ReferenceInput
-                perPage={5000}
-                label="Usuario"
-                source="user_id"
-                reference="users"
-              >
-                <SelectInput optionText="first_name" fullWidth />
-              </ReferenceInput>
-            </Grid>
+            {role == '"admin"' && (
+              <Grid item xs={12} md={6}>
+                <ReferenceInput
+                  perPage={5000}
+                  label="Usuario"
+                  source="user_id"
+                  reference="users"
+                >
+                  <SelectInput optionText="first_name" fullWidth />
+                </ReferenceInput>
+              </Grid>
+            )}
           </Grid>
         </SimpleForm>
       </Edit>

@@ -33,7 +33,17 @@ const CurrentStatus = [
 ];
 
 export default class ShopCreate extends Component {
+  state = {
+    role: "user",
+  };
+
+  async componentDidMount() {
+    let role = await localStorage.getItem("permissions");
+    console.log(role);
+    this.setState({ role: role });
+  }
   render() {
+    const { role } = this.state;
     return (
       <Create title="Crear una empresa" {...this.props}>
         <SimpleForm>
@@ -105,16 +115,18 @@ export default class ShopCreate extends Component {
                 optionValue="id"
               />
             </Grid>
-            <Grid item xs={12} md={6}>
-              <SelectInput
-                fullWidth
-                source="status"
-                label="Estado"
-                choices={StatusTypes}
-                optionText="name"
-                optionValue="id"
-              />
-            </Grid>
+            {role == '"admin"' && (
+              <Grid item xs={12} md={6}>
+                <SelectInput
+                  fullWidth
+                  source="status"
+                  label="Estado"
+                  choices={StatusTypes}
+                  optionText="name"
+                  optionValue="id"
+                />
+              </Grid>
+            )}
             <Grid item xs={12} md={6}>
               <TextInput source="address" label="dirección" fullWidth />
             </Grid>
