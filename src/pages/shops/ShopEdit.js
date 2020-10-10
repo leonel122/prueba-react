@@ -91,8 +91,29 @@ export default class CompanyEdit extends Component {
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
           <Grid container fullWidth spacing={4}>
-            <Grid item xs={12} md={6} container>
-              <TextInput source="full_name" label="Nombre completo" fullWidth />
+            <Grid item xs={6}>
+              {path_image ? (
+                <img
+                  src={`${URL_S3}${path_image}`}
+                  width="200px"
+                  height="200px"
+                  className="custom-img-field"
+                />
+              ) : null}
+              <S3File
+                idComponent="category-image"
+                path="categories"
+                handleUploadFinish={this.handleUploadFinish}
+                id={this.props.id}
+                label="Subir logo"
+              />
+            </Grid>
+            <Grid item xs={12} md={12} container>
+              <TextInput
+                source="full_name"
+                label="Nombre completo del propietario"
+                fullWidth
+              />
             </Grid>
             <Grid item xs={12} md={6} container>
               <SelectInput
@@ -118,22 +139,29 @@ export default class CompanyEdit extends Component {
               <TextInput source="nit" label="Nit / Rut" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextInput source="phone" label="Telefono" fullWidth />
+              <TextInput
+                source="phone"
+                label="Telefono de la tienda"
+                fullWidth
+              />
             </Grid>
             <Grid item xs={12} md={6} container>
               <TextInput source="name" label="Nombre de la tienda" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
+              <TextInput source="whatsapp" label="Whatsapp" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6}>
               <TextInput
                 source="link_facebook"
-                label="link facebook"
+                label="Usuaurio de facebook"
                 fullWidth
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextInput
                 source="link_instagram"
-                label="link instagram"
+                label="Usuario de instagram sin el @"
                 fullWidth
               />
             </Grid>

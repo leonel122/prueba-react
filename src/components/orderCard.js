@@ -53,7 +53,6 @@ export default function MediaCard({ ...props }) {
           <div className={classes.description}>
             <Typography variant="body1" color="textSecondary" component="p">
               valor productos:
-              {props.order ? props.order.order.value : "No encontrado"}
             </Typography>
             <Typography
               variant="body1"
@@ -115,6 +114,8 @@ export default function MediaCard({ ...props }) {
                   ? "Rechazada"
                   : props.order.order.order_status_id == 5
                   ? "Entregada"
+                  : props.order.order.order_status_id == 6
+                  ? "Cancelada"
                   : "Cancelada"
                 : "No encontrado"}
             </Typography>
@@ -136,7 +137,8 @@ export default function MediaCard({ ...props }) {
       <CardActions className={classes.description}>
         {props.order &&
           props.order.order.order_status_id != 4 &&
-          props.order.order.order_status_id != 5 && (
+          props.order.order.order_status_id != 5 &&
+          props.order.order.order_status_id != 6 && (
             <Button
               size="mediun"
               color="primary"

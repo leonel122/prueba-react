@@ -8,7 +8,7 @@ import {
   Filter,
   TextInput,
   SelectInput,
-  ReferenceField,
+  ReferenceInput,
 } from "react-admin";
 import { Title } from "./";
 const DayField = ({ source, record = {} }) => {
@@ -31,6 +31,9 @@ const DayField = ({ source, record = {} }) => {
   } `;
 };
 
+const StatusField = ({ source, record = {} }) => {
+  return `${record.status == "active" ? "Activo" : "Inactivo"} `;
+};
 const days = [
   { id: "0", name: "Domingo" },
   { id: "1", name: "Lunes" },
@@ -52,6 +55,9 @@ const Filters = (props) => (
       optionValue="id"
       alwaysOn
     />
+    <ReferenceInput label="Tienda" source="shop_id" reference="shops">
+      <SelectInput optionText="name" />
+    </ReferenceInput>
   </Filter>
 );
 
@@ -66,6 +72,7 @@ const ScheduleList = ({ permissions, ...props }) => {
         <DayField label="Dia" />
         <TextField source="start_hour" label="Abro a las" />
         <TextField source="end_hour" label="Cierro a las" />
+        <StatusField source="status" label="Estado" />
         <EditButton label="Editar" />
       </Datagrid>
     </List>

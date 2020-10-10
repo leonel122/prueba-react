@@ -49,7 +49,11 @@ export default class ShopCreate extends Component {
         <SimpleForm>
           <Grid container fullWidth spacing={16}>
             <Grid item xs={12} md={6} container>
-              <TextInput source="full_name" label="Nombre completo" fullWidth />
+              <TextInput
+                source="full_name"
+                label="Nombre completo del propietario"
+                fullWidth
+              />
             </Grid>
             <Grid item xs={12} md={6} container>
               <SelectInput
@@ -75,22 +79,29 @@ export default class ShopCreate extends Component {
               <TextInput source="nit" label="Nit / Rut" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextInput source="phone" label="Telefono" fullWidth />
+              <TextInput
+                source="phone"
+                label="Telefono de la tienda"
+                fullWidth
+              />
             </Grid>
             <Grid item xs={12} md={6} container>
               <TextInput source="name" label="Nombre de la tienda" fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
+              <TextInput source="whatsapp" label="Whatsapp" fullWidth />
+            </Grid>
+            <Grid item xs={12} md={6}>
               <TextInput
                 source="link_facebook"
-                label="link facebook"
+                label="Usuario facebook"
                 fullWidth
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextInput
                 source="link_instagram"
-                label="link instagram"
+                label="usuario instagram"
                 fullWidth
               />
             </Grid>

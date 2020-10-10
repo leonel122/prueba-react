@@ -14,12 +14,23 @@ const days = [
   { id: "6", name: "Sabado" },
 ];
 
+const status = [
+  { id: "active", name: "Activo" },
+  { id: "inactive", name: "Inactivo" },
+];
+
 export default class CompanyEdit extends Component {
   render() {
     return (
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
           <Grid container fullWidth spacing={16}>
+            <Grid item xs={12} md={6}>
+              <DateTimeInput source="start_hour" label="Hora de apertura" />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <DateTimeInput source="end_hour" label="Hora de cierre" />
+            </Grid>
             <Grid item xs={12} md={6}>
               <ReferenceInput
                 label="Tienda"
@@ -46,8 +57,14 @@ export default class CompanyEdit extends Component {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <DateTimeInput source="start_hour" label="Hora de apertura" />
-              <DateTimeInput source="end_hour" label="Hora de cierre" />
+              <SelectInput
+                fullWidth
+                source="status"
+                label="Estado"
+                choices={status}
+                optionText="name"
+                optionValue="id"
+              />
             </Grid>
           </Grid>
         </SimpleForm>
