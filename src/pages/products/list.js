@@ -9,6 +9,8 @@ import {
   SelectInput,
 } from "react-admin";
 import { Title } from "./";
+import { URL_S3 } from "../../constants";
+
 const Status = [
   { id: "active", name: "Activo" },
   { id: "inactive", name: "Inactivo" },
@@ -26,6 +28,15 @@ const StatusField = ({ source, record = {}, ...props }) => {
     </p>
   );
 };
+const ImageField = ({ record }) => {
+  return (
+    record.image && (
+      <img width="60px" height="60px" src={`${URL_S3}${record.image}`} />
+    )
+  );
+};
+
+ImageField.defaultProps = { label: "Imagen" };
 
 const Filters = (props) => (
   <Filter {...props}>
@@ -46,7 +57,8 @@ const ShopList = ({ permissions, ...props }) => {
   return (
     <List {...props} filters={<Filters />} exporter={true} title={<Title />}>
       <Datagrid>
-        <TextField source="id" label="id" />
+        {permissions === "admin" && <TextField source="id" label="id" />}
+        <ImageField />
         <TextField source="name" label="Nombre" />
         <StatusField source="status" label="Estado" />
         {permissions === "admin" && (

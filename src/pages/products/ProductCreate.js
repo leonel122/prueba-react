@@ -33,7 +33,7 @@ export default class ProductCreate extends Component {
               <NumberInput
                 fullWidth
                 source="value"
-                label="Price"
+                label="Precio"
                 type="number"
               />
             </Grid>

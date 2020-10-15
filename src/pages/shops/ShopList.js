@@ -11,6 +11,8 @@ import {
   ReferenceField,
 } from "react-admin";
 import { Title } from "./";
+import { URL_S3 } from "../../constants";
+
 const CurrentStatusField = ({ source, record = {} }) => {
   return `${record.current_status == "open" ? "Abierta" : "Cerrada"} `;
 };
@@ -51,15 +53,29 @@ const Filters = (props) => (
   </Filter>
 );
 
+const ImageField = ({ record }) => {
+  return (
+    record.logo && (
+      <img width="60px" height="60px" src={`${URL_S3}${record.logo}`} />
+    )
+  );
+};
+
+ImageField.defaultProps = { label: "Logo" };
+
 const ShopList = ({ permissions, ...props }) => {
   return (
     <List {...props} filters={<Filters />} exporter={false} title={<Title />}>
       <Datagrid>
-        <TextField source="id" label="id" />
+        {permissions === "admin" && <TextField source="id" label="id" />}
+        <ImageField />
         <TextField source="name" label="Nombre" />
-        <TextField source="nit" label="Nit" />
+        {permissions === "admin" && <TextField source="nit" label="Nit" />}
+        {permissions === "admin" && (
+          <TextField source="status" label="Estado" />
+        )}
         <CurrentStatusField />
-        <TextField source="status" label="Estado" />
+
         {permissions === "admin" && (
           <TextField source="phone" label="Telefono" />
         )}
@@ -69,7 +85,6 @@ const ShopList = ({ permissions, ...props }) => {
         {permissions === "admin" && (
           <TextField source="user_id" label="Usuario" />
         )}
-
         <EditButton label="Editar" />
       </Datagrid>
     </List>

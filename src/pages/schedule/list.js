@@ -32,7 +32,7 @@ const DayField = ({ source, record = {} }) => {
 };
 
 const StatusField = ({ source, record = {} }) => {
-  return `${record.status == "active" ? "Activo" : "Inactivo"} `;
+  return `${record.status == "active" ? "si" : "no"} `;
 };
 const days = [
   { id: "0", name: "Domingo" },
@@ -72,7 +72,7 @@ const ScheduleList = ({ permissions, ...props }) => {
         <DayField label="Dia" />
         <TextField source="start_hour" label="Abro a las" />
         <TextField source="end_hour" label="Cierro a las" />
-        <StatusField source="status" label="Estado" />
+        <StatusField source="status" label="Abro" />
         <EditButton label="Editar" />
       </Datagrid>
     </List>

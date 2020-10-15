@@ -15,57 +15,69 @@ const days = [
 ];
 
 const status = [
-  { id: "active", name: "Activo" },
-  { id: "inactive", name: "Inactivo" },
+  { id: "active", name: "si" },
+  { id: "inactive", name: "no" },
 ];
 
 export default class CompanyEdit extends Component {
-  render() {
+  render(permissions) {
     return (
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
           <Grid container fullWidth spacing={16}>
             <Grid item xs={12} md={6}>
-              <DateTimeInput source="start_hour" label="Hora de apertura" />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <DateTimeInput source="end_hour" label="Hora de cierre" />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <ReferenceInput
-                label="Tienda"
-                source="shop_id"
-                reference="shops"
-                alwaysOn
-              >
-                <SelectInput
-                  fullWidth
-                  source="shop_id"
-                  label="Tienda"
-                  alwaysOn
-                />
-              </ReferenceInput>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <SelectInput
-                fullWidth
-                source="day"
-                label="Dia"
-                choices={days}
-                optionText="name"
-                optionValue="id"
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
               <SelectInput
                 fullWidth
                 source="status"
-                label="Estado"
+                label="Abro"
                 choices={status}
                 optionText="name"
                 optionValue="id"
               />
             </Grid>
+            <Grid item xs={12} md={6}>
+              <DateTimeInput
+                fullWidth
+                source="start_hour"
+                label="Hora de apertura"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <DateTimeInput
+                fullWidth
+                source="end_hour"
+                label="Hora de cierre"
+              />
+            </Grid>
+            {permissions === "admin" && (
+              <Grid item xs={12} md={6}>
+                <ReferenceInput
+                  label="Tienda"
+                  source="shop_id"
+                  reference="shops"
+                  alwaysOn
+                >
+                  <SelectInput
+                    fullWidth
+                    source="shop_id"
+                    label="Tienda"
+                    alwaysOn
+                  />
+                </ReferenceInput>
+              </Grid>
+            )}
+            {permissions === "admin" && (
+              <Grid item xs={12} md={6}>
+                <SelectInput
+                  fullWidth
+                  source="day"
+                  label="Dia"
+                  choices={days}
+                  optionText="name"
+                  optionValue="id"
+                />
+              </Grid>
+            )}
           </Grid>
         </SimpleForm>
       </Edit>

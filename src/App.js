@@ -56,6 +56,7 @@ const App = () => (
     authProvider={authClient(Api, authClientOptions)}
     history={history}
     appLayout={Layout}
+    initialState={initialState}
     /* i18nProvider={i18nProvider} */
     locale="en"
   >
@@ -87,6 +88,7 @@ const App = () => (
             />,
           ]
         : null,
+      <Resource name="orders" list={orderList} show={orderShow} />,
       <Resource
         name="users"
         create={
@@ -107,7 +109,6 @@ const App = () => (
         create={permissions == "admin" ? ShopCreate : false}
         edit={ShopEdit}
       />,
-      <Resource name="orders" list={orderList} show={orderShow} />,
       <Resource
         name="products"
         list={ListProduct}
