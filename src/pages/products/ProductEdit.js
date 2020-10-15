@@ -6,6 +6,7 @@ import {
   ReferenceInput,
   SelectInput,
   NumberInput,
+  required,
 } from "react-admin";
 import Grid from "@material-ui/core/Grid";
 import S3File from "../../components/S3-field";
@@ -43,50 +44,6 @@ export default class CompanyEdit extends Component {
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
           <Grid fullWidth container spacing={3}>
-            <Grid item xs={12} md={6} spacing={6}>
-              <TextInput fullWidth source="name" label="Nombre" />
-            </Grid>
-            {permissions === "admin" && (
-              <Grid item xs={12} md={6}>
-                <ReferenceInput
-                  label="Tienda"
-                  source="shop_id"
-                  reference="shops"
-                >
-                  <SelectInput optionText="name" fullWidth />
-                </ReferenceInput>
-              </Grid>
-            )}
-            <Grid item xs={12} md={6}>
-              <NumberInput fullWidth source="value" label="Precio" />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextInput
-                type="number"
-                fullWidth
-                source="quantity"
-                label="Cantidad"
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <SelectInput
-                fullWidth
-                source="status"
-                label="Estado"
-                choices={[
-                  { id: "active", name: "Activo" },
-                  { id: "inactive", name: "Inactivo" },
-                ]}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <TextInput
-                multiline
-                fullWidth
-                source="description"
-                label="Descripcion"
-              />
-            </Grid>
             <Grid item xs={12} style={{ textAlign: "center" }}>
               <div style={{ textAlign: "initial" }}>
                 {path_image ? (
@@ -109,6 +66,62 @@ export default class CompanyEdit extends Component {
                   id={this.props.id}
                 />
               </div>
+            </Grid>
+            <Grid item xs={12} md={6} spacing={6}>
+              <TextInput
+                fullWidth
+                source="name"
+                label="Nombre"
+                validate={[required("El nombre es requerido")]}
+              />
+            </Grid>
+            {permissions === "admin" && (
+              <Grid item xs={12} md={6}>
+                <ReferenceInput
+                  label="Tienda"
+                  source="shop_id"
+                  reference="shops"
+                >
+                  <SelectInput optionText="name" fullWidth />
+                </ReferenceInput>
+              </Grid>
+            )}
+            <Grid item xs={12} md={6}>
+              <NumberInput
+                fullWidth
+                source="value"
+                label="Precio"
+                validate={[required("El precio es requerido")]}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                type="number"
+                fullWidth
+                source="quantity"
+                label="Cantidad"
+                validate={[required("La cantidad es requerida")]}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <SelectInput
+                fullWidth
+                source="status"
+                label="Estado"
+                choices={[
+                  { id: "active", name: "Activo" },
+                  { id: "inactive", name: "Inactivo" },
+                ]}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextInput
+                multiline
+                fullWidth
+                source="description"
+                label="Descripcion"
+                validate={[required("La descripción es requerida")]}
+              />
             </Grid>
           </Grid>
         </SimpleForm>

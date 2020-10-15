@@ -5,10 +5,7 @@ import {
   TextInput,
   ReferenceInput,
   SelectInput,
-  NumberInput,
-  SimpleShowLayout,
-  CheckboxGroupInput,
-  AutoCompleteInput,
+  required,
 } from "react-admin";
 import Grid from "@material-ui/core/Grid";
 import S3File from "../../components/S3-field";
@@ -44,8 +41,8 @@ const YearExperienceList = [
 ];
 
 const StatusTypes = [
-  { id: "Activa", name: "Activada" },
-  { id: "Desactivada", name: "Desactivada" },
+  { id: "Activa", name: "Publicada" },
+  { id: "Desactivada", name: "No publicada" },
   { id: "Bloqueada", name: "Bloqueada" },
 ];
 
@@ -113,6 +110,7 @@ export default class CompanyEdit extends Component {
                 source="full_name"
                 label="Nombre completo del propietario"
                 fullWidth
+                validate={[required("El nombre del propietario es requerido")]}
               />
             </Grid>
             <Grid item xs={12} md={6} container>
@@ -123,6 +121,7 @@ export default class CompanyEdit extends Component {
                 choices={PersonsTypes}
                 optionText="name"
                 optionValue="id"
+                validate={[required("Debes seleccionar un tipo de persona")]}
               />
             </Grid>
             <Grid item xs={12} md={6} container>
@@ -133,6 +132,7 @@ export default class CompanyEdit extends Component {
                 choices={document_type}
                 optionText="name"
                 optionValue="id"
+                validate={[required("Denes seleccionar un tipo de documento")]}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -143,10 +143,18 @@ export default class CompanyEdit extends Component {
                 source="phone"
                 label="Telefono de la tienda"
                 fullWidth
+                validate={[
+                  required("El numero de telefono de la tienda es requerido"),
+                ]}
               />
             </Grid>
             <Grid item xs={12} md={6} container>
-              <TextInput source="name" label="Nombre de la tienda" fullWidth />
+              <TextInput
+                source="name"
+                label="Nombre de la tienda"
+                fullWidth
+                validate={[required("El nombre de la tienda es requerido")]}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
               <TextInput source="whatsapp" label="Whatsapp" fullWidth />
@@ -182,24 +190,23 @@ export default class CompanyEdit extends Component {
               <SelectInput
                 fullWidth
                 source="current_status"
-                label="Estado"
+                label="Abierta o cerrada"
                 choices={CurrentStatus}
                 optionText="name"
                 optionValue="id"
               />
             </Grid>
-            {role == '"admin"' && (
-              <Grid item xs={12} md={6}>
-                <SelectInput
-                  fullWidth
-                  source="status"
-                  label="Estado"
-                  choices={StatusTypes}
-                  optionText="name"
-                  optionValue="id"
-                />
-              </Grid>
-            )}
+            <Grid item xs={12} md={6}>
+              <SelectInput
+                fullWidth
+                source="status"
+                label="Estado de la tienda"
+                choices={StatusTypes}
+                optionText="name"
+                optionValue="id"
+                style={{ color: "red" }}
+              />
+            </Grid>
             <Grid item xs={12} md={6}>
               <TextInput source="address" label="dirección" fullWidth />
             </Grid>
