@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import { useMediaQuery } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
@@ -17,9 +18,12 @@ const useStyles = makeStyles({
 
 export default function SimpleTable({ ...props }) {
   const classes = useStyles();
-
+  const matches = useMediaQuery("(min-width:600px)");
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      style={{ maxWidth: matches ? "100%" : "352px" }}
+    >
       <div>
         <Typography gutterBottom variant="h5" component="h2">
           Productos comprados
@@ -33,6 +37,7 @@ export default function SimpleTable({ ...props }) {
             <TableCell align="center">Precio unitario</TableCell>
             <TableCell align="center">cantidad</TableCell>
             <TableCell align="center">Total</TableCell>
+            <TableCell align="center">Notas</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -50,6 +55,13 @@ export default function SimpleTable({ ...props }) {
               <TableCell align="center">{row.quantity}</TableCell>
               <TableCell align="center">
                 {JSON.parse(row.meta_product).value * row.quantity}
+              </TableCell>
+              <TableCell
+                size="small"
+                align="justify"
+                style={{ maxWidth: "101px" }}
+              >
+                {row.notes}
               </TableCell>
             </TableRow>
           ))}

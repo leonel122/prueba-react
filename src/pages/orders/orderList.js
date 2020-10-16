@@ -90,7 +90,7 @@ const orderList = ({ permissions, ...props }) => {
         <TextField source="user.phone" label="Teléfono" />
         <StatusField label="Estado" />
         <DateField source="createdAt" label="Fecha" />
-        <TextField source="value" label="Valor" />
+        <TextField source="total_value" label="Valor total" />
         <TextField source="shipping_cost" label="Costo de envío" />
         <ShowButton label="Ver" />
       </Datagrid>
