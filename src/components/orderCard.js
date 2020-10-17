@@ -90,7 +90,7 @@ export default function MediaCard({ ...props }) {
               style={{
                 color: props.order
                   ? props.order.order.order_status_id == 1
-                    ? "green"
+                    ? "red"
                     : props.order.order.order_status_id == 2
                     ? "#FF9C33"
                     : props.order.order.order_status_id == 3

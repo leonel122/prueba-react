@@ -1,5 +1,12 @@
 import React, { Component, useState } from "react";
-import { Edit, SimpleForm, ReferenceInput, SelectInput } from "react-admin";
+import {
+  Edit,
+  SimpleForm,
+  ReferenceInput,
+  SelectInput,
+  Toolbar,
+  SaveButton,
+} from "react-admin";
 import Grid from "@material-ui/core/Grid";
 import { Title } from ".";
 import { DateTimeInput } from "react-admin";
@@ -19,12 +26,29 @@ const status = [
   { id: "inactive", name: "no" },
 ];
 
+const PostEditToolbar = (props) => (
+  <Toolbar {...props}>
+    <SaveButton label="Guardar" />
+  </Toolbar>
+);
+
 export default class CompanyEdit extends Component {
   render(permissions) {
     return (
-      <Edit title={<Title />} {...this.props}>
-        <SimpleForm>
+      <Edit successMessage="Guardando" title={<Title />} {...this.props}>
+        <SimpleForm toolbar={<PostEditToolbar />}>
           <Grid container fullWidth spacing={16}>
+            <Grid item xs={12} md={6}>
+              <SelectInput
+                fullWidth
+                source="day"
+                label="Dia"
+                disabled
+                choices={days}
+                optionText="name"
+                optionValue="id"
+              />
+            </Grid>
             <Grid item xs={12} md={6}>
               <SelectInput
                 fullWidth
@@ -66,18 +90,8 @@ export default class CompanyEdit extends Component {
                 </ReferenceInput>
               </Grid>
             )}
-            {permissions === "admin" && (
-              <Grid item xs={12} md={6}>
-                <SelectInput
-                  fullWidth
-                  source="day"
-                  label="Dia"
-                  choices={days}
-                  optionText="name"
-                  optionValue="id"
-                />
-              </Grid>
-            )}
+            {/* {permissions === "admin" && ( */}
+            {/* )} */}
           </Grid>
         </SimpleForm>
       </Edit>

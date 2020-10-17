@@ -8,7 +8,6 @@ import {
   Filter,
   SelectInput,
   ReferenceInput,
-  DeleteButton,
 } from "react-admin";
 import { Title } from "./";
 const Filters = ({ permissions, ...props }) => (
@@ -36,7 +35,15 @@ const Filters = ({ permissions, ...props }) => (
 
 const ShopList = ({ permissions, ...props }) => {
   return (
-    <List {...props} filters={<Filters />} exporter={false} title={<Title />}>
+    <List
+      {...props}
+      filters={<Filters />}
+      bulkActionButtons={false}
+      exporter={false}
+      create={false}
+      title={<Title />}
+      actions={false}
+    >
       <Datagrid>
         {permissions == "admin" && <TextField source="id" label="id" />}
         {permissions == "admin" && (

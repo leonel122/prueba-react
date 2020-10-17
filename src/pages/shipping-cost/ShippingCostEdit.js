@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import {
   Edit,
   SimpleForm,
-  TextInput,
+  Toolbar,
+  SaveButton,
   ReferenceInput,
   SelectInput,
   NumberInput,
@@ -10,11 +11,17 @@ import {
 import Grid from "@material-ui/core/Grid";
 import { Title } from ".";
 
+const PostEditToolbar = (props) => (
+  <Toolbar {...props}>
+    <SaveButton label="Guardar" />
+  </Toolbar>
+);
+
 export default class CompanyEdit extends Component {
   render() {
     return (
       <Edit title={<Title />} {...this.props}>
-        <SimpleForm>
+        <SimpleForm toolbar={<PostEditToolbar />}>
           <Grid container fullWidth spacing={16}>
             <Grid item xs={12} md={6} container>
               <ReferenceInput

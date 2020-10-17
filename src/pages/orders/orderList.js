@@ -45,7 +45,7 @@ const StatusField = ({ source, record = {}, ...props }) => {
       style={{
         color:
           record.order_status_id == 1
-            ? "green"
+            ? "red"
             : record.order_status_id == 2
             ? "#FF9C33"
             : record.order_status_id == 3
@@ -54,7 +54,7 @@ const StatusField = ({ source, record = {}, ...props }) => {
             ? "red"
             : record.order_status_id == 5
             ? "green"
-            : "red",
+            : "gray",
         fontWeight: "bold",
       }}
     >
@@ -77,21 +77,22 @@ const orderList = ({ permissions, ...props }) => {
   return (
     <List
       {...props}
+      bulkActionButtons={false}
       filters={<Filters />}
       sort={{ field: "createdAt", order: "DESC" }}
       title={<Title />}
     >
       <Datagrid>
-        <TextField source="id" label="id" />
+        {permissions === "admin" && <TextField source="id" label="id" />}
         {permissions === "admin" && (
           <TextField source="shop.name" label="Tienda" />
         )}
         <UserNameField label="Cliente" />
-        <TextField source="user.phone" label="Teléfono" />
+        {/* <TextField source="user.phone" label="Teléfono" /> */}
         <StatusField label="Estado" />
         <DateField source="createdAt" label="Fecha" />
         <TextField source="total_value" label="Valor total" />
-        <TextField source="shipping_cost" label="Costo de envío" />
+        {/* <TextField source="shipping_cost" label="Costo de envío" /> */}
         <ShowButton label="Ver" />
       </Datagrid>
     </List>

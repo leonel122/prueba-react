@@ -65,7 +65,13 @@ ImageField.defaultProps = { label: "Logo" };
 
 const ShopList = ({ permissions, ...props }) => {
   return (
-    <List {...props} filters={<Filters />} exporter={false} title={<Title />}>
+    <List
+      {...props}
+      filters={<Filters />}
+      bulkActionButtons={false}
+      exporter={false}
+      title={<Title />}
+    >
       <Datagrid>
         {permissions === "admin" && <TextField source="id" label="id" />}
         <ImageField />

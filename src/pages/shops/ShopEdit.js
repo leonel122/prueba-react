@@ -6,6 +6,8 @@ import {
   ReferenceInput,
   SelectInput,
   required,
+  Toolbar,
+  SaveButton,
 } from "react-admin";
 import Grid from "@material-ui/core/Grid";
 import S3File from "../../components/S3-field";
@@ -51,6 +53,12 @@ const CurrentStatus = [
   { id: "close", name: "Cerrada" },
 ];
 
+const PostEditToolbar = (props) => (
+  <Toolbar {...props}>
+    <SaveButton label="Guardar" />
+  </Toolbar>
+);
+
 export default class CompanyEdit extends Component {
   state = {
     path_image: null,
@@ -86,7 +94,7 @@ export default class CompanyEdit extends Component {
 
     return (
       <Edit title={<Title />} {...this.props}>
-        <SimpleForm>
+        <SimpleForm toolbar={<PostEditToolbar />}>
           <Grid container fullWidth spacing={4}>
             <Grid item xs={6}>
               {path_image ? (

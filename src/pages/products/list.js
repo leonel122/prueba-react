@@ -55,17 +55,23 @@ const Filters = (props) => (
 
 const ShopList = ({ permissions, ...props }) => {
   return (
-    <List {...props} filters={<Filters />} exporter={true} title={<Title />}>
+    <List
+      {...props}
+      filters={<Filters />}
+      // exporter={true}
+      title={<Title />}
+      bulkActionButtons={false}
+    >
       <Datagrid>
         {permissions === "admin" && <TextField source="id" label="id" />}
         <ImageField />
         <TextField source="name" label="Nombre" />
-        <StatusField source="status" label="Estado" />
+        {/* <StatusField source="status" label="Estado" /> */}
         {permissions === "admin" && (
           <TextField source="shop.name" label="Tienda" />
         )}
         <TextField source="value" label="precio" />
-        <TextField source="quantity" label="Cantidad" />
+        {/* <TextField source="quantity" label="Cantidad" /> */}
         <EditButton label="Editar" />
       </Datagrid>
     </List>

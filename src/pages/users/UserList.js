@@ -78,13 +78,14 @@ const UserList = ({ permissions, ...props }) => {
                 title={<Title />}
                 exporter={false}
                 filters={<Filters />}
+                bulkActionButtons={false}
               >
                 <Datagrid rowClick="edit" optimized {...props}>
                   {permissions == "admin" && <TextField source="id" disable />}
                   <TextField label="Nombre" source="first_name" />
                   <TextField label="Apellido" source="last_name" />
-                  <TextField label="Teléfono" source="phone" />
-                  <EmailField source="email" />
+                  {/* <TextField label="Teléfono" source="phone" /> */}
+                  {/* <EmailField source="email" /> */}
                   {permissions == "admin" && (
                     <TextField source="status" label="Estado" />
                   )}

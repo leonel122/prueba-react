@@ -55,7 +55,7 @@ const Filters = (props) => (
       optionValue="id"
       alwaysOn
     />
-    <ReferenceInput label="Tienda" source="shop_id" reference="shops">
+    <ReferenceInput alwaysOn label="Tienda" source="shop_id" reference="shops">
       <SelectInput optionText="name" />
     </ReferenceInput>
   </Filter>
@@ -63,7 +63,14 @@ const Filters = (props) => (
 
 const ScheduleList = ({ permissions, ...props }) => {
   return (
-    <List {...props} filters={<Filters />} exporter={false} title={<Title />}>
+    <List
+      {...props}
+      filters={<Filters />}
+      exporter={false}
+      title={<Title />}
+      bulkActionButtons={false}
+      actions={false}
+    >
       <Datagrid>
         {permissions === "admin" && <TextField source="id" label="id" />}
         {permissions === "admin" && (
@@ -72,7 +79,7 @@ const ScheduleList = ({ permissions, ...props }) => {
         <DayField label="Dia" />
         <TextField source="start_hour" label="Abro a las" />
         <TextField source="end_hour" label="Cierro a las" />
-        <StatusField source="status" label="Abro" />
+        {/* <StatusField source="status" label="Abro" /> */}
         <EditButton label="Editar" />
       </Datagrid>
     </List>
