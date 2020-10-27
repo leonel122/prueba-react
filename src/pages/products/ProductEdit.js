@@ -18,28 +18,29 @@ export default class CompanyEdit extends Component {
   state = {
     path_image: null,
     expanded: false,
+    role: null,
   };
 
   async fetchData() {
-    console.log(this.props);
     productsService
       .get(this.props.id)
       .then((it) => this.setState({ path_image: it.image }));
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const role = await localStorage.getItem("permissions");
+    this.setState({ role: role });
     this.fetchData();
   }
 
   handleUploadFinish = async (url, id) => {
-    console.log(url, "----------");
     await productsService
       .patch(this.props.id, { image: url })
       .then((it) => this.fetchData());
   };
 
   render(permissions) {
-    const { path_image } = this.state;
+    const { path_image, role } = this.state;
     return (
       <Edit title={<Title />} {...this.props}>
         <SimpleForm>
@@ -61,7 +62,7 @@ export default class CompanyEdit extends Component {
               >
                 <S3File
                   idComponent="category-image"
-                  path="categories"
+                  path="products/"
                   handleUploadFinish={this.handleUploadFinish}
                   id={this.props.id}
                 />
@@ -75,7 +76,7 @@ export default class CompanyEdit extends Component {
                 validate={[required("El nombre es requerido")]}
               />
             </Grid>
-            {permissions === "admin" && (
+            {role == '"admin"' && (
               <Grid item xs={12} md={6}>
                 <ReferenceInput
                   label="Tienda"

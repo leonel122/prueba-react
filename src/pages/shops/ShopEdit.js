@@ -75,15 +75,11 @@ export default class CompanyEdit extends Component {
 
   async componentDidMount() {
     const role = await localStorage.getItem("permissions");
-    console.log(role, "rolellllllll");
     this.setState({ role: role });
     this.fetchData();
-
-    console.log(role, "oooooooooooooo");
   }
 
   handleUploadFinish = async (url, id) => {
-    console.log(url, "----------");
     await shopService
       .patch(this.props.id, { logo: url })
       .then((it) => this.fetchData());

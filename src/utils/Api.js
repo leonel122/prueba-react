@@ -27,5 +27,6 @@ export const shopService = api.service("shops");
 export const ordersService = api.service("orders");
 export const currentUserService = api.service("current-user");
 export const bannersService = api.service("banners");
+export const scheduleService = api.service("schedule");
 
 export default api;

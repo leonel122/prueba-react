@@ -12,7 +12,20 @@ import { Grid } from "@material-ui/core";
 import { Title } from ".";
 
 export default class ProductCreate extends Component {
+  state = {
+    role: null,
+  };
+
+  async componentDidMount() {
+    const role = await localStorage.getItem("permissions");
+    console.log(role, "rolellllllll");
+    this.setState({ role: role });
+    // this.fetchData();
+
+    console.log(role, "oooooooooooooo");
+  }
   render(permissions) {
+    const { role } = this.state;
     return (
       <Create {...this.props} title="Crear producto">
         <SimpleForm>
@@ -25,7 +38,7 @@ export default class ProductCreate extends Component {
                 validate={[required("El nombre es requerido")]}
               />
             </Grid>
-            {permissions === "admin" && (
+            {role == '"admin"' && (
               <Grid item xs={12} md={6}>
                 <ReferenceInput
                   label="Tienda"
