@@ -167,17 +167,19 @@ export default function MediaCard({ ...props }) {
                 onChange={handleChangeEndHour}
               />
             </Grid>
-            <Grid item xs={12} md={6} style={{ textAlign: "left" }}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => sendData(props.id)}
-              >
-                Guardar
-              </Button>
-            </Grid>
           </Grid>
         )}
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6} style={{ textAlign: "left" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => sendData(props.id)}
+            >
+              Guardar
+            </Button>
+          </Grid>
+        </Grid>
       </Paper>
     </Container>
   );
