@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import jwt_decode from "jwt-decode";
 import {
   List,
   Datagrid,
@@ -12,6 +12,7 @@ import {
 } from "react-admin";
 import { Title } from "./";
 import { URL_S3 } from "../../constants";
+import { shopService } from "../../utils/Api";
 
 const CurrentStatusField = ({ source, record = {} }) => {
   return `${record.current_status == "open" ? "Abierta" : "Cerrada"} `;
@@ -64,13 +65,28 @@ const ImageField = ({ record }) => {
 ImageField.defaultProps = { label: "Logo" };
 
 const ShopList = ({ permissions, ...props }) => {
+  console.log(props);
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    var token = localStorage.getItem("feathers-jwt");
+    console.log(token);
+    const user1 = jwt_decode(token);
+    setUser(user1);
+    console.log(user, "-------------");
+    console.log(user1, "-------------");
+  }, []);
+
   return (
+    // console.log(user)
     <List
       {...props}
       filters={<Filters />}
       bulkActionButtons={false}
       exporter={false}
       title={<Title />}
+      filterDefaultValues={user.shop ? { id: user.shop && user.shop } : false}
     >
       <Datagrid>
         {permissions === "admin" && <TextField source="id" label="id" />}

@@ -21,6 +21,7 @@
     "final-form-arrays": "^3.0.2",
     "history": "^4.10.1",
     "jsonexport": "^2.4.1",
+    "jwt-decode": "^3.0.0",
     "material-ui-color-picker": "^3.4.0",
     "moment": "^2.24.0",
     "ra-data-feathers": "^2.5.0",
