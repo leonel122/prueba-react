@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -23,6 +24,17 @@ const useStyles = makeStyles({
 
 export default function MediaCard({ ...props }) {
   const classes = useStyles();
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    var token = localStorage.getItem("feathers-jwt");
+    console.log(token);
+    const user1 = jwt_decode(token);
+    setUser(user1);
+    console.log(user, "-------------");
+    console.log(user1, "-------------");
+  }, []);
 
   return (
     <Card className={classes.root}>
@@ -138,7 +150,8 @@ export default function MediaCard({ ...props }) {
         {props.order &&
           props.order.order.order_status_id != 4 &&
           props.order.order.order_status_id != 5 &&
-          props.order.order.order_status_id != 6 && (
+          props.order.order.order_status_id != 6 &&
+          props.order.order.shop_id == user.shop_id && (
             <Button
               size="mediun"
               color="primary"

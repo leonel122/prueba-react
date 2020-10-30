@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import jwt_decode from "jwt-decode";
 import {
   List,
   Datagrid,
@@ -7,9 +8,12 @@ import {
   Filter,
   TextInput,
   SelectInput,
+  CreateButton,
 } from "react-admin";
 import { Title } from "./";
 import { URL_S3 } from "../../constants";
+import { Typography, Box, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const Status = [
   { id: "active", name: "Activo" },
@@ -53,7 +57,37 @@ const Filters = (props) => (
   </Filter>
 );
 
-const ShopList = ({ permissions, ...props }) => {
+const Empty = () => {
+  return (
+    <Box textAlign="center" m={1}>
+      <Typography variant="h6" paragraph style={{ fontWeight: "bold" }}>
+        Aun no tienes productos
+      </Typography>
+      {/* <Link to="/products/create">
+        <Button variant="contained" color="primary">
+          Crear
+        </Button>
+      </Link> */}
+      <Typography variant="body" paragraph style={{ fontWeight: "bold" }}>
+        Agrega uno en el boton +
+      </Typography>
+      <CreateButton label="Crear producto" basePath={"/products/create"} />
+    </Box>
+  );
+};
+
+const ProductsList = ({ permissions, ...props }) => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    var token = localStorage.getItem("feathers-jwt");
+    console.log(token);
+    const user1 = jwt_decode(token);
+    setUser(user1);
+    console.log(user, "-------------");
+    console.log(user1, "-------------");
+  }, []);
+
   return (
     <List
       {...props}
@@ -61,6 +95,10 @@ const ShopList = ({ permissions, ...props }) => {
       // exporter={true}
       title={<Title />}
       bulkActionButtons={false}
+      empty={<Empty />}
+      filterDefaultValues={
+        user.shop ? { shop_id: user.shop && user.shop } : false
+      }
     >
       <Datagrid>
         {permissions === "admin" && <TextField source="id" label="id" />}
@@ -78,4 +116,4 @@ const ShopList = ({ permissions, ...props }) => {
   );
 };
 
-export default ShopList;
+export default ProductsList;

@@ -7,12 +7,20 @@ import {
   SelectInput,
   NumberInput,
   required,
+  Toolbar,
+  SaveButton,
 } from "react-admin";
 import Grid from "@material-ui/core/Grid";
 import S3File from "../../components/S3-field";
 import { Title } from "./";
 import { URL_S3 } from "../../constants";
 import { productsService } from "../../utils/Api";
+
+const PostEditToolbar = (props) => (
+  <Toolbar {...props}>
+    <SaveButton label="Guardar" />
+  </Toolbar>
+);
 
 export default class CompanyEdit extends Component {
   state = {
@@ -43,7 +51,7 @@ export default class CompanyEdit extends Component {
     const { path_image, role } = this.state;
     return (
       <Edit title={<Title />} {...this.props}>
-        <SimpleForm>
+        <SimpleForm toolbar={<PostEditToolbar />}>
           <Grid fullWidth container spacing={3}>
             <Grid item xs={12} style={{ textAlign: "center" }}>
               <div style={{ textAlign: "initial" }}>
@@ -100,7 +108,7 @@ export default class CompanyEdit extends Component {
                 type="number"
                 fullWidth
                 source="quantity"
-                label="Cantidad"
+                label="Cantidad disponible"
                 validate={[required("La cantidad es requerida")]}
               />
             </Grid>
