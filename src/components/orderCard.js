@@ -151,7 +151,7 @@ export default function MediaCard({ ...props }) {
           props.order.order.order_status_id != 4 &&
           props.order.order.order_status_id != 5 &&
           props.order.order.order_status_id != 6 &&
-          props.order.order.shop_id == user.shop_id && (
+          (props.order.order.shop_id == user.shop || user.role == "admin") && (
             <Button
               size="mediun"
               color="primary"

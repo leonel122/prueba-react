@@ -112,6 +112,13 @@ export default class Menu extends Component {
               />,
               <MenuItemLink
                 style={{ fontWeight: "bold", color: "black" }}
+                to={`/featured-products`}
+                primaryText={"Top productos"}
+                onClick={onMenuClick}
+                leftIcon={<ScheduleIcon />}
+              />,
+              <MenuItemLink
+                style={{ fontWeight: "bold", color: "black" }}
                 to={`/cms`}
                 primaryText={"cms"}
                 onClick={onMenuClick}

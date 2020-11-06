@@ -27,7 +27,11 @@ import {
 } from "./pages/shipping-cost";
 import { ScheduleList, ScheduleEdit, ScheduleCreate } from "./pages/schedule";
 import { CmsList, CmsCreate, CmsEdit } from "./pages/cms";
-
+import {
+  FeatureCreate,
+  FeatureEdit,
+  FeatureList,
+} from "./pages/featured-products";
 import authProvider from "./authProvider";
 
 const restClientOptions = {
@@ -85,6 +89,12 @@ const App = () => (
               list={CmsList}
               edit={CmsEdit}
               create={CmsCreate}
+            />,
+            <Resource
+              name="featured-products"
+              list={FeatureList}
+              edit={FeatureEdit}
+              create={FeatureCreate}
             />,
           ]
         : null,

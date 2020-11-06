@@ -125,7 +125,6 @@ export default class CompanyEdit extends Component {
                 choices={PersonsTypes}
                 optionText="name"
                 optionValue="id"
-                validate={[required("Debes seleccionar un tipo de persona")]}
               />
             </Grid>
             <Grid item xs={12} md={6} container>
@@ -136,7 +135,6 @@ export default class CompanyEdit extends Component {
                 choices={document_type}
                 optionText="name"
                 optionValue="id"
-                validate={[required("Denes seleccionar un tipo de documento")]}
               />
             </Grid>
             <Grid item xs={12} md={6}>
