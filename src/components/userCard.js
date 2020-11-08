@@ -2,11 +2,13 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
+import IconButton from "@material-ui/core/IconButton";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
   root: {
@@ -23,8 +25,13 @@ const useStyles = makeStyles({
 
 export default function MediaCard({ ...props }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const upSm = useMediaQuery(theme.breakpoints.up("sm"));
 
-  console.log(props, "---------------");
+  const redirectSocialRed = (link) => {
+    window.open(link, "_blank");
+  };
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -54,6 +61,37 @@ export default function MediaCard({ ...props }) {
                 ? `${props.metaData.user.email}`
                 : "No encontrado"}
             </Typography>
+          </div>
+          <div className={classes.description} style={{ marginTop: 20 }}>
+            <Button
+              size="small"
+              color="primary"
+              style={{
+                backgroundColor: "green",
+                color: "white",
+                height: 35,
+                fontWeight: "bold",
+              }}
+              startIcon={<WhatsAppIcon style={{ color: "white" }} />}
+              onClick={() => props.handleRejected()}
+              onClick={() =>
+                redirectSocialRed(
+                  !upSm
+                    ? `whatsapp://send?text=""&phone=+57${
+                        props.metaData && props.metaData.user
+                          ? `${props.metaData.user.phone}`
+                          : "No encontrado"
+                      }`
+                    : `https://wa.me/+57${
+                        props.metaData && props.metaData.user
+                          ? `${props.metaData.user.phone}`
+                          : "No encontrado"
+                      }`
+                )
+              }
+            >
+              Enviar Whatsapp
+            </Button>
           </div>
         </CardContent>
       </CardActionArea>
